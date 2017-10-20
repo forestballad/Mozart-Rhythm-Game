@@ -701,9 +701,10 @@ GameObject:
   m_Component:
   - component: {fileID: 742606895}
   - component: {fileID: 742606896}
+  - component: {fileID: 742606898}
   - component: {fileID: 742606897}
   m_Layer: 0
-  m_Name: RhythmLevelController
+  m_Name: GameLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -754,11 +755,6 @@ MonoBehaviour:
   ComboText: {fileID: 1137205720}
   HornPrefab: {fileID: 1220628037013282, guid: 22a767613f1cca644ab5a68eeb5d5fd1, type: 2}
   AmadeDrum: {fileID: 1024845542}
-  animatedOnPlayList:
-  - {fileID: 2080478952}
-  - {fileID: 1107116163}
-  - {fileID: 141716566}
-  - {fileID: 1526360832}
   TempRecord: []
 --- !u!82 &742606897
 AudioSource:
@@ -840,6 +836,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &742606898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 742606894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03b08cbf4ba15a4187c04d6873a151d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameLogic: {fileID: 742606894}
+  SimpleAnimatedCharacter:
+  - {fileID: 1107116162}
+  - {fileID: 141716565}
+  - {fileID: 2080478951}
 --- !u!1 &873618223
 GameObject:
   m_ObjectHideFlags: 0

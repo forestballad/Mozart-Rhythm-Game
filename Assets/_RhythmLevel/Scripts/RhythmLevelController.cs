@@ -53,8 +53,6 @@ public class RhythmLevelController : MonoBehaviour {
     public Animator AmadeDrum;
     int currentIntensity;
 
-    public List<Animator> animatedOnPlayList = new List<Animator>(); 
-
     public List<float> TempRecord = new List<float>();
 
     void Awake()
@@ -148,15 +146,11 @@ public class RhythmLevelController : MonoBehaviour {
             }
 
             // Amade Drum Intensity would change over time. Hardcoded.
-            #region AmadeDrum & Foreground Animation
+            #region AmadeDrum
             if (currentIntensity == 0 && timer >= playDelaying)
             {
                 AmadeDrum.SetInteger("Intensity", 0);
                 currentIntensity = 1;
-                for (int i = 0; i < animatedOnPlayList.Count; i++)
-                {
-                    animatedOnPlayList[i].GetComponent<Animator>().SetBool("IsActive", true);
-                }
             }
             else if (currentIntensity == 1 && timer >= 4.63)
             {
@@ -192,8 +186,6 @@ public class RhythmLevelController : MonoBehaviour {
                 }
             }
             #endregion
-
-            
 
             if (!MusicPlayer.isPlaying)
             {
@@ -255,6 +247,8 @@ public class RhythmLevelController : MonoBehaviour {
 
         playDelaying = (NoteStartLoc.transform.position.x - NoteEndLoc.transform.position.x) * Time.deltaTime / NotePrefab.GetComponent<NoteController>().speed;
         MusicPlayer.PlayDelayed(playDelaying);
+
+        GetComponent<IchBinExtraordinarStageControl>().BeginActing();
     }
 
     public void StartRecordingNote()
@@ -337,5 +331,10 @@ public class RhythmLevelController : MonoBehaviour {
         {
             score += finalScore;
         }
+    }
+
+    public float GetCurrentTimestamp()
+    {
+        return timer;
     }
 }
