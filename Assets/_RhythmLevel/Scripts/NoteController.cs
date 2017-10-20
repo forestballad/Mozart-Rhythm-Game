@@ -31,7 +31,7 @@ public class NoteController : MonoBehaviour {
 
     void Start () {
         vanishPoint = GameObject.Find("NoteEndLoc");
-        gameLogic = GameObject.Find("RhythmLevelController");
+        gameLogic = GameObject.Find("GameLogic");
         CatchHit = false;
         Hittable = true;
     }

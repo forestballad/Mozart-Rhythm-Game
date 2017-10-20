@@ -46,13 +46,6 @@ public class RhythmLevelController : MonoBehaviour {
         public List<Note> NoteType;
     }
 
-    public GameObject HornPrefab;
-    List<float> HornQueue = new List<float> {15.77f, 20.39f, 29.02f, 33.78f, 55.85f, 60.71f, 86f};
-    int currentHorn;
-
-    public Animator AmadeDrum;
-    int currentIntensity;
-
     public List<float> TempRecord = new List<float>();
 
     void Awake()
@@ -66,8 +59,6 @@ public class RhythmLevelController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-
         if (CurrentGameState == GameState.recording)
         {
             #region Recording Note
@@ -145,53 +136,9 @@ public class RhythmLevelController : MonoBehaviour {
                 }
             }
 
-            // Amade Drum Intensity would change over time. Hardcoded.
-            #region AmadeDrum
-            if (currentIntensity == 0 && timer >= playDelaying)
-            {
-                AmadeDrum.SetInteger("Intensity", 0);
-                currentIntensity = 1;
-            }
-            else if (currentIntensity == 1 && timer >= 4.63)
-            {
-                AmadeDrum.SetInteger("Intensity", 1);
-                currentIntensity = 2;
-            }
-            else if (currentIntensity == 2 && timer >= 87.88)
-            {
-                AmadeDrum.SetInteger("Intensity", 0);
-                currentIntensity = 3;
-            }
-            else if (currentIntensity == 3 && timer >= 99.54)
-            {
-                AmadeDrum.SetInteger("Intensity", 1);
-                currentIntensity = 4;
-            }
-            else if (currentIntensity == 4 && timer >= 102.23)
-            {
-                AmadeDrum.SetInteger("Intensity", 2);
-                currentIntensity = 5;
-            }            
-            #endregion
-
-            // Horn Display is currently hardcoded.
-            #region Horn
-            if (currentHorn < HornQueue.Count)
-            {
-                if (timer-playDelaying > HornQueue[currentHorn])
-                {
-                    GameObject newHorn = Instantiate(HornPrefab);
-                    newHorn.GetComponent<HornController>().InitHorn(1);
-                    currentHorn++;
-                }
-            }
-            #endregion
-
             if (!MusicPlayer.isPlaying)
             {
                 CurrentGameState = GameState.idle;
-                AmadeDrum.SetInteger("Intensity", -1);
-                currentIntensity = -1;
             }
             
         }
@@ -233,17 +180,10 @@ public class RhythmLevelController : MonoBehaviour {
         NoteType = savedNotes.NoteType;
         NoteTime = savedNotes.NoteTime;
 
-        Debug.Log(NoteType.Count);
-
         CurrentGameState = GameState.playing;
         timer = 0;
         score = 0;
         combo = 0;
-
-        currentNote = 0;
-        currentHorn = 0;
-        currentIntensity = 0;
-        AmadeDrum.SetInteger("Intensity", -1);
 
         playDelaying = (NoteStartLoc.transform.position.x - NoteEndLoc.transform.position.x) * Time.deltaTime / NotePrefab.GetComponent<NoteController>().speed;
         MusicPlayer.PlayDelayed(playDelaying);

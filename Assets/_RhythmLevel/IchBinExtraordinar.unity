@@ -754,7 +754,6 @@ MonoBehaviour:
   ScoreText: {fileID: 1674502307}
   ComboText: {fileID: 1137205720}
   HornPrefab: {fileID: 1220628037013282, guid: 22a767613f1cca644ab5a68eeb5d5fd1, type: 2}
-  AmadeDrum: {fileID: 1024845542}
   TempRecord: []
 --- !u!82 &742606897
 AudioSource:
@@ -852,6 +851,9 @@ MonoBehaviour:
   - {fileID: 1107116162}
   - {fileID: 141716565}
   - {fileID: 2080478951}
+  AmadeDrum: {fileID: 1024845541}
+  CaciliaHorn: {fileID: 0}
+  HornPrefab: {fileID: 1220628037013282, guid: 22a767613f1cca644ab5a68eeb5d5fd1, type: 2}
 --- !u!1 &873618223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,7 +2088,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1526360830}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.43, y: -2.63, z: 0}
+  m_LocalPosition: {x: 2.37, y: -2.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1020875199}
