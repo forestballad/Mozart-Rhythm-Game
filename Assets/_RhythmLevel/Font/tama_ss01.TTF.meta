@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 299e9e0551726c045ae6b52c7be9ab69
+timeCreated: 1508225840
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: tama ss01
+  fontNames:
+  - tama ss01
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
