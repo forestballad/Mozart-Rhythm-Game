@@ -60,19 +60,18 @@ MonoBehaviour:
   BNoteHit: {fileID: 21300010, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
   hitSprite: {fileID: 21300006, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
   vanishPoint: {fileID: 0}
-  gameLogic: {fileID: 0}
-  speed: 0.1
   notetype: left
   hitParticleGood: {fileID: 198158067205326052, guid: 557e8f50c70fd7540be9f124796b6f00,
     type: 2}
   hitParticlePerfect: {fileID: 198158067205326052, guid: 5ab0ae8a1c39d294eaa6f5f1e9fbb7a0,
     type: 2}
   NoteOrder: 0
-  CatchLeftHit: 0
-  CatchRightHit: 0
+  CatchHit: 0
   Hittable: 0
-  TimeStamp: 0
   hitPerfectCheck: 0.4
+  spawnPoint: {fileID: 0}
+  gameLogic: {fileID: 0}
+  speed: 2.5
 --- !u!212 &212178824210649824
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -150,7 +150,7 @@ public class RhythmLevelController : MonoBehaviour {
         #region SpawnNote
         if (CurrentGameState == GameState.playing && currentNote < NoteTime.Count)
         {
-            if (timer >= NoteTime[currentNote])
+            if (timer >= (NoteTime[currentNote]-10))
             {
                 GameObject newNote = Instantiate(NotePrefab, NoteContainer.transform);
                 if (NoteType[currentNote] == Note.left)
@@ -186,7 +186,7 @@ public class RhythmLevelController : MonoBehaviour {
         combo = 0;
 
         playDelaying = (NoteStartLoc.transform.position.x - NoteEndLoc.transform.position.x) * Time.deltaTime / NotePrefab.GetComponent<NoteController>().speed;
-        MusicPlayer.PlayDelayed(playDelaying);
+        MusicPlayer.Play();
 
         GetComponent<IchBinExtraordinarStageControl>().BeginActing();
     }

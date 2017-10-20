@@ -13,9 +13,7 @@ public class NoteController : MonoBehaviour {
     public Sprite hitSprite;
 
     public GameObject vanishPoint;
-    public GameObject gameLogic;
 
-    public float speed;
     public string notetype;
     public ParticleSystem hitParticleGood;
     public ParticleSystem hitParticlePerfect;
@@ -23,22 +21,36 @@ public class NoteController : MonoBehaviour {
     public int NoteOrder;
     public bool CatchHit;
     public bool Hittable;
-    public float TimeStamp;
+    float m_Timestamp;
+    float m_currentTimestamp;
 
     public float hitPerfectCheck = 0.4f;
+
+
+    public GameObject spawnPoint;
+    public GameObject gameLogic;
+
+    Vector3 m_SpawnLoc;
+    Vector3 m_VanishLoc;
+    public float speed;
 
     // Use this for initialization
 
     void Start () {
         vanishPoint = GameObject.Find("NoteEndLoc");
+        spawnPoint = GameObject.Find("NoteStartLoc");
         gameLogic = GameObject.Find("GameLogic");
         CatchHit = false;
         Hittable = true;
+
+        m_SpawnLoc = spawnPoint.transform.position;
+        m_VanishLoc = vanishPoint.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+        m_currentTimestamp = gameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
+        transform.position = GetCurrentLocByTimetamp();
         if (vanishPoint.transform.position.x - transform.position.x > gameLogic.GetComponent<RhythmLevelController>().hitRangeCheck && !CatchHit)
         {
             Hittable = false;
@@ -52,6 +64,7 @@ public class NoteController : MonoBehaviour {
 
     public void Init(string noteType, GameObject loc, int order, float TS)
     {
+        m_Timestamp = TS;
         transform.position = loc.transform.position;
         if (noteType == "left")
         {
@@ -72,6 +85,13 @@ public class NoteController : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = BNote;
             hitSprite = BNoteHit;
         }
+    }
+
+    public Vector3 GetCurrentLocByTimetamp()
+    {
+        float dist = Vector3.Distance(m_SpawnLoc, m_VanishLoc) * (m_Timestamp - m_currentTimestamp) / speed;
+        Vector3 NoteLoc = new Vector3(m_VanishLoc.x + dist, m_VanishLoc.y, m_VanishLoc.z);
+        return NoteLoc;
     }
 
     public void GetHit(string hitType, float hitRange)
