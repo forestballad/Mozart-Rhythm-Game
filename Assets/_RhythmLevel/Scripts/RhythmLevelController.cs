@@ -22,6 +22,12 @@ public class RhythmLevelController : MonoBehaviour {
     public List<float> NoteTime;
     public List<Note> NoteType;
     public float timer;
+    float m_LastValidHit_Timestamp;
+    string m_LastValidHit_Type;
+
+    int score;
+    int combo;
+
     public int currentNote;
 
     public GameObject NotePrefab;
@@ -31,14 +37,6 @@ public class RhythmLevelController : MonoBehaviour {
 
     public float playDelaying;
     public float hitRangeCheck = 0.6f;
-
-    public GameObject NoteResultText;
-    public float NoteResultTextDisplayTime = 0.2f;
-    float NRTLifeSpan;
-    public int score;
-    public int combo;
-    public GameObject ScoreText;
-    public GameObject ComboText;
 
     public class NoteClass
     {
@@ -87,16 +85,10 @@ public class RhythmLevelController : MonoBehaviour {
         if (CurrentGameState == GameState.playing)
         {
             timer += Time.deltaTime;
-            if (timer > NRTLifeSpan)
-            {
-                NoteResultText.SetActive(false);
-                ScoreText.GetComponent<Text>().text = "SCORE:" + score.ToString();
-                ComboText.GetComponent<Text>().text = "COMBO:" + combo.ToString();
-            }
 
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L))
             {
-                float timestamp = timer - playDelaying;
+                m_LastValidHit_Timestamp = timer;
                 List<GameObject> PotentialAffectedNotes = new List<GameObject>();
                 foreach (Transform SingleNote in NoteContainer.transform)
                 {
@@ -132,7 +124,7 @@ public class RhythmLevelController : MonoBehaviour {
                             closestNote.GetComponent<NoteController>().GetHit("right", closetDist);
                         }
                     }
-                    
+
                 }
             }
 
@@ -140,7 +132,7 @@ public class RhythmLevelController : MonoBehaviour {
             {
                 CurrentGameState = GameState.idle;
             }
-            
+
         }
     }
 
@@ -150,20 +142,29 @@ public class RhythmLevelController : MonoBehaviour {
         #region SpawnNote
         if (CurrentGameState == GameState.playing && currentNote < NoteTime.Count)
         {
-            if (timer >= (NoteTime[currentNote]-10))
+            if (timer >= (NoteTime[currentNote] - 10))
             {
+                float lst = 2f ;
+                if (timer > 90)
+                {
+                    lst = 1.5f;
+                }
+                else
+                {
+                    lst = 2.5f;
+                }
                 GameObject newNote = Instantiate(NotePrefab, NoteContainer.transform);
                 if (NoteType[currentNote] == Note.left)
                 {
-                    newNote.GetComponent<NoteController>().Init("left", NoteStartLoc, currentNote, NoteTime[currentNote]);
+                    newNote.GetComponent<NoteController>().Init("left", NoteTime[currentNote], lst);
                 }
                 else if (NoteType[currentNote] == Note.right)
                 {
-                    newNote.GetComponent<NoteController>().Init("right", NoteStartLoc, currentNote, NoteTime[currentNote]);
+                    newNote.GetComponent<NoteController>().Init("right", NoteTime[currentNote], lst);
                 }
                 else if (NoteType[currentNote] == Note.both)
                 {
-                    newNote.GetComponent<NoteController>().Init("both", NoteStartLoc, currentNote, NoteTime[currentNote]);
+                    newNote.GetComponent<NoteController>().Init("both", NoteTime[currentNote],lst);
                 }
                 currentNote++;
             }
@@ -222,8 +223,12 @@ public class RhythmLevelController : MonoBehaviour {
         }
     }
 
-    public void BreakCombo()
+    public void BreakCombo(bool wrongHit)
     {
+        if (wrongHit)
+        {
+            m_LastValidHit_Type = "WRONG";
+        }
         combo = 0;
     }
 
@@ -249,19 +254,18 @@ public class RhythmLevelController : MonoBehaviour {
 
     public void AddScore(string hitType, bool halfbaseScore)
     {
-        NoteResultText.SetActive(true);
-        NoteResultText.GetComponent<Text>().text = hitType + "!";
-        NRTLifeSpan = timer + NoteResultTextDisplayTime;
         int baseScore = 0;
         if (hitType == "GOOD")
         {
+            m_LastValidHit_Type = "GOOD";
             baseScore = 10;
         }
         else if (hitType == "PERFECT")
         {
+            m_LastValidHit_Type = "PERFECT";
             baseScore = 20;
         }
-        combo ++;
+        combo++;
         int finalScore = baseScore + combo * getComboMultiplier();
         if (halfbaseScore)
         {
@@ -276,5 +280,25 @@ public class RhythmLevelController : MonoBehaviour {
     public float GetCurrentTimestamp()
     {
         return timer;
+    }
+
+    public int GetCurrentScore()
+    {
+        return score;
+    }
+
+    public int GetCurrentCombo()
+    {
+        return combo;
+    }
+
+    public float GetLastValidHitTimestamp()
+    {
+        return m_LastValidHit_Timestamp;
+    }
+
+    public string GetLastValidHitType()
+    {
+        return m_LastValidHit_Type;
     }
 }

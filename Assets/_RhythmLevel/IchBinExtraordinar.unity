@@ -753,7 +753,6 @@ MonoBehaviour:
   combo: 0
   ScoreText: {fileID: 1674502307}
   ComboText: {fileID: 1137205720}
-  HornPrefab: {fileID: 1220628037013282, guid: 22a767613f1cca644ab5a68eeb5d5fd1, type: 2}
   TempRecord: []
 --- !u!82 &742606897
 AudioSource:
@@ -854,6 +853,10 @@ MonoBehaviour:
   AmadeDrum: {fileID: 1024845541}
   CaciliaHorn: {fileID: 0}
   HornPrefab: {fileID: 1220628037013282, guid: 22a767613f1cca644ab5a68eeb5d5fd1, type: 2}
+  NoteResultText: {fileID: 699048702}
+  NRT_DisplayTime: 0.2
+  ScoreText: {fileID: 1674502307}
+  ComboText: {fileID: 1137205720}
 --- !u!1 &873618223
 GameObject:
   m_ObjectHideFlags: 0

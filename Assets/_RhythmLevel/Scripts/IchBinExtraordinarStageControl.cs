@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject GameLogic;
@@ -39,6 +40,15 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     // Todo: polish this acting
     public GameObject HornPrefab;
 
+    // Combo / Score / Note Result would be specifict to stage
+    public GameObject NoteResultText;
+    public float NRT_DisplayTime = 0.2f;
+    float m_NRT_Vanish_Timestamp;
+    public GameObject ScoreText;
+    public GameObject ComboText;
+    int m_Score;
+    int m_Combo;
+
     // Use this for initialization
     void Start () {
         m_IsActing = false;
@@ -56,7 +66,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 	void Update () {
         if (m_IsActing)
         {
-            m_TimeStamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
+            SyncDataWithGameLogic();
             if (SAC_Record.ActionCounter < SAC_Record.KeyTimestamp.Count)
             {
                 Do_SAC_Action();
@@ -69,8 +79,17 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             {
                 Do_CH_Action();
             }
+            UpdateScoreAndCombo();
         }
 	}
+
+    void SyncDataWithGameLogic()
+    {
+        m_TimeStamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
+        m_Combo = GameLogic.GetComponent<RhythmLevelController>().GetCurrentCombo();
+        m_Score = GameLogic.GetComponent<RhythmLevelController>().GetCurrentScore();
+        m_NRT_Vanish_Timestamp = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitTimestamp() + NRT_DisplayTime;
+    }
 
     void Create_SAC_ActionQueue()
     {
@@ -130,6 +149,21 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             GameObject newHorn = Instantiate(HornPrefab);
             newHorn.GetComponent<HornController>().InitHorn(1);
             CH_Record.ActionCounter++;
+        }
+    }
+
+    void UpdateScoreAndCombo()
+    {
+        ScoreText.GetComponent<Text>().text = "SCORE:" + m_Score.ToString();
+        ComboText.GetComponent<Text>().text = "COMBO:" + m_Combo.ToString();
+        NoteResultText.GetComponent<Text>().text = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitType() + "!";
+        if (m_TimeStamp > m_NRT_Vanish_Timestamp)
+        {
+            NoteResultText.SetActive(false);
+        }
+        else
+        {
+            NoteResultText.SetActive(true);
         }
     }
 }
