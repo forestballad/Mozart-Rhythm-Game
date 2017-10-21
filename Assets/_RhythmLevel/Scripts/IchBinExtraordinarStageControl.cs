@@ -49,6 +49,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     int m_Score;
     int m_Combo;
 
+    public GameObject ArcoAngryBar;
+    public GameObject ArcoAngryWeak;
+    public GameObject ArcoAngryStrong;
+
     // Use this for initialization
     void Start () {
         m_IsActing = false;
@@ -154,6 +158,28 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     void UpdateScoreAndCombo()
     {
+        Vector3 ArcoAngryBarScale = new Vector3(22f/50f*m_Combo, 1f, 1f);
+        if (ArcoAngryBarScale.x <= 22)
+        {
+            ArcoAngryBar.transform.localScale = ArcoAngryBarScale;
+
+        }
+        else
+        {
+            ArcoAngryBar.transform.localScale = new Vector3(22f, 1f, 1f);
+        }
+
+        if (m_Combo >= 50 && ArcoAngryStrong.activeSelf == false)
+        {
+            ArcoAngryStrong.SetActive(true);
+            ArcoAngryWeak.SetActive(false);
+        }
+        else if (m_Combo < 50 && ArcoAngryStrong.activeSelf == true)
+        {
+            ArcoAngryStrong.SetActive(false);
+            ArcoAngryWeak.SetActive(true);
+        }
+
         ScoreText.GetComponent<Text>().text = "SCORE:" + m_Score.ToString();
         ComboText.GetComponent<Text>().text = "COMBO:" + m_Combo.ToString();
         NoteResultText.GetComponent<Text>().text = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitType() + "!";
