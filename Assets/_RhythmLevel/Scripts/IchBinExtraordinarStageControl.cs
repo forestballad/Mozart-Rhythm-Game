@@ -48,6 +48,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ComboText;
     int m_Score;
     int m_Combo;
+    string m_LastValidHitType;
 
     public GameObject ArcoAngryBar;
     public GameObject ArcoAngryWeak;
@@ -59,11 +60,15 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         Create_SAC_ActionQueue();
         Create_AD_ActionQueue();
         Create_CH_ActionQueue();
+
     }
 	
     public void BeginActing()
     {
         m_IsActing = true;
+        m_Score = 0;
+        m_Combo = 0;
+        m_LastValidHitType = "";
     }
 
 	// Update is called once per frame
@@ -90,8 +95,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     void SyncDataWithGameLogic()
     {
         m_TimeStamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
-        m_Combo = GameLogic.GetComponent<RhythmLevelController>().GetCurrentCombo();
-        m_Score = GameLogic.GetComponent<RhythmLevelController>().GetCurrentScore();
         m_NRT_Vanish_Timestamp = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitTimestamp() + NRT_DisplayTime;
     }
 
@@ -162,7 +165,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         if (ArcoAngryBarScale.x <= 22)
         {
             ArcoAngryBar.transform.localScale = ArcoAngryBarScale;
-
         }
         else
         {
@@ -182,7 +184,29 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
         ScoreText.GetComponent<Text>().text = "SCORE:" + m_Score.ToString();
         ComboText.GetComponent<Text>().text = "COMBO:" + m_Combo.ToString();
-        NoteResultText.GetComponent<Text>().text = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitType() + "!";
+
+        NoteResultText.GetComponent<Text>().text = m_LastValidHitType + "!";
+
+        Color HRTColor = new Color(0,0,0);
+        switch (m_LastValidHitType)
+        {
+            case "PERFECT":
+                HRTColor = new Color(255,255,255);
+                break;
+            case "GOOD":
+                HRTColor = new Color(255f, 0, 0);
+                break;
+            case "BAD":
+                HRTColor = new Color(0, 255f, 0);
+                break;
+            case "WRONG":
+                HRTColor = new Color(0, 0, 255f);
+                break;
+            default:
+                break;
+        }
+        NoteResultText.GetComponent<Text>().color = HRTColor;
+
         if (m_TimeStamp > m_NRT_Vanish_Timestamp)
         {
             NoteResultText.SetActive(false);
@@ -192,4 +216,56 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             NoteResultText.SetActive(true);
         }
     }
+
+    public void NoteFail(string hitType)
+    {
+        m_LastValidHitType = hitType;
+        m_Combo = 0;
+    }
+
+    public void NoteSuccess(string hitType, bool halfbaseScore)
+    {
+        int baseScore = 0;
+        if (hitType == "GOOD")
+        {
+            m_LastValidHitType = "GOOD";
+            baseScore = 10;
+        }
+        else if (hitType == "PERFECT")
+        {
+            m_LastValidHitType = "PERFECT";
+            baseScore = 20;
+        }
+        m_Combo++;
+        int finalScore = baseScore + m_Combo * getComboMultiplier();
+        if (halfbaseScore)
+        {
+            m_Score += finalScore / 2;
+        }
+        else
+        {
+            m_Score += finalScore;
+        }
+    }
+
+    int getComboMultiplier()
+    {
+        if (m_Combo >= 100)
+        {
+            return 5;
+        }
+        else if (m_Combo >= 50)
+        {
+            return 3;
+        }
+        else if (m_Combo >= 10)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
 }

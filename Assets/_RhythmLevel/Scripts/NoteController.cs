@@ -24,6 +24,7 @@ public class NoteController : MonoBehaviour {
 
     public GameObject vanishPoint;
     public GameObject spawnPoint;
+
     public GameObject GameLogic;
 
     Camera MainCamera;
@@ -112,7 +113,7 @@ public class NoteController : MonoBehaviour {
     public void PerfectNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
-        GameLogic.GetComponent<RhythmLevelController>().AddScore("PERFECT", halfbaseScore);
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("PERFECT", halfbaseScore);
 
         ParticleSystem ps = Instantiate(hitParticlePerfect);
         ps.transform.position = vanishPoint.transform.position;
@@ -122,7 +123,7 @@ public class NoteController : MonoBehaviour {
     public void GoodNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
-        GameLogic.GetComponent<RhythmLevelController>().AddScore("GOOD",halfbaseScore);
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("PERFECT", halfbaseScore);
 
         ParticleSystem ps = Instantiate(hitParticleGood);
         ps.transform.position = vanishPoint.transform.position;
@@ -132,12 +133,12 @@ public class NoteController : MonoBehaviour {
     public void BadNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
-        GameLogic.GetComponent<RhythmLevelController>().BreakCombo(false);
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("BAD");
     }
 
     public void WrongNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
-        GameLogic.GetComponent<RhythmLevelController>().BreakCombo(true);
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("WRONG");
     }
 }
