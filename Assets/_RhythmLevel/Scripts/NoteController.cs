@@ -11,18 +11,16 @@ public class NoteController : MonoBehaviour {
     public Sprite BNoteHit;
 
     public Sprite hitSprite;
+    public Sprite badSprite;
 
-    public string notetype;
-    public ParticleSystem hitParticleGood;
-    public ParticleSystem hitParticlePerfect;
-
-    public int NoteOrder;
-    public bool CatchHit;
-    public bool Hittable;
     float m_Timestamp;
+    string m_notetype;
+    float m_lifespan;
+
     float m_currentTimestamp;
 
-    public float hitPerfectCheck = 0.4f;
+    public float HitGoodThreshold = 0.4f;
+    public float HitPerfectThreshold = 0.2f;
 
     public GameObject vanishPoint;
     public GameObject spawnPoint;
@@ -32,7 +30,10 @@ public class NoteController : MonoBehaviour {
 
     Vector3 m_SpawnLoc;
     Vector3 m_VanishLoc;
-    public float speed;
+
+
+    public ParticleSystem hitParticleGood;
+    public ParticleSystem hitParticlePerfect;
 
     // Use this for initialization
 
@@ -40,10 +41,6 @@ public class NoteController : MonoBehaviour {
         vanishPoint = GameObject.Find("NoteEndLoc");
         spawnPoint = GameObject.Find("NoteStartLoc");
         GameLogic = GameObject.Find("GameLogic");
-        CatchHit = false;
-        Hittable = true;
-
-        GetComponent<SpriteRenderer>().enabled = false;
 
         m_SpawnLoc = spawnPoint.transform.position;
         m_VanishLoc = vanishPoint.transform.position;
@@ -52,109 +49,63 @@ public class NoteController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         m_currentTimestamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
-        transform.position = GetCurrentLocByTimetamp();
-
-        if (transform.position.x < m_SpawnLoc.x)
-        {
-            GetComponent<SpriteRenderer>().enabled = true;
-        }
-
-        if (vanishPoint.transform.position.x - transform.position.x > GameLogic.GetComponent<RhythmLevelController>().hitRangeCheck && !CatchHit)
-        {
-            Hittable = false;
-            GameLogic.GetComponent<RhythmLevelController>().BreakCombo(false);
-        }
-        if (transform.position.x < -10)
-        {
-            Destroy(gameObject);
-        }
+        transform.position = GetLocByTimetamp();
     }
 
-    public void Init(string noteType, float timestamp, float lsp)
+    public void Init(float timestamp, string inputNoteType, float lifespan)
     {
         m_Timestamp = timestamp;
-        speed = lsp;
-        if (noteType == "left")
+        m_lifespan = lifespan;
+        if (inputNoteType == "0")
         {
-            notetype = "left";
+            m_notetype = "0";
             GetComponent<SpriteRenderer>().sprite = LNote;
             hitSprite = LNoteHit;
-
         }
-        else if(noteType == "right")
+        else if(inputNoteType == "1")
         {
-            notetype = "right";
+            m_notetype = "1";
             GetComponent<SpriteRenderer>().sprite = RNote;
             hitSprite = RNoteHit;
         }
-        else if (noteType == "both")
+        else if (inputNoteType == "2")
         {
-            notetype = "both";
+            m_notetype = "2";
             GetComponent<SpriteRenderer>().sprite = BNote;
             hitSprite = BNoteHit;
         }
     }
 
-    public Vector3 GetCurrentLocByTimetamp()
+    public Vector3 GetLocByTimetamp()
     {
-        float dist = Vector3.Distance(m_SpawnLoc, m_VanishLoc) * (m_Timestamp - m_currentTimestamp) / speed;
+        float dist = Vector3.Distance(m_SpawnLoc, m_VanishLoc) * (m_Timestamp - m_currentTimestamp) / m_lifespan;
         Vector3 NoteLoc = new Vector3(m_VanishLoc.x + dist, m_VanishLoc.y, m_VanishLoc.z);
         return NoteLoc;
     }
 
-    public void GetHit(string hitType, float hitRange)
+    public void GetHit(string hitType, float timeDiff)
     {
-        Hittable = false;
-        CatchHit = true;
-        if ((hitType == "left" || hitType == "both") && notetype == "left")
-        {
-            if (hitRange <= hitPerfectCheck) {
-                PerfectNotePlayed(false);
-            }
-            else {
-                GoodNotePlayed(false);
-            }
-        }
-        else if ((hitType == "right" || hitType == "both") && notetype == "right")
-        {
-            if (hitRange <= hitPerfectCheck)
-            {
-                PerfectNotePlayed(false);
-            }
-            else
-            {
-                GoodNotePlayed(false);
-            }
-        }
-        else if (hitType == "right" && notetype == "left")
+        if ((hitType == "1" && m_notetype == "0") || (hitType == "0" && m_notetype == "1"))
         {
             WrongNotePlayed();
+            return;
         }
-        else if (hitType == "left" && notetype == "right")
+        bool halfScore = false;
+        if ((hitType == "1" || hitType == "0" )&& m_notetype == "2")
         {
-            WrongNotePlayed();
+            halfScore = true;
         }
-        else if ((hitType == "left" || hitType == "right") && notetype == "both")
+        if (timeDiff > HitGoodThreshold)
         {
-            if (hitRange <= hitPerfectCheck)
-            {
-                PerfectNotePlayed(true);
-            }
-            else
-            {
-                GoodNotePlayed(true);
-            }
+            BadNotePlayed();
         }
-        else if (hitType == "both" && notetype == "both")
+        else if (timeDiff <= HitPerfectThreshold)
         {
-            if (hitRange <= hitPerfectCheck)
-            {
-                PerfectNotePlayed(false);
-            }
-            else
-            {
-                GoodNotePlayed(false);
-            }
+            PerfectNotePlayed(halfScore);
+        }
+        else
+        {
+            GoodNotePlayed(halfScore);
         }
     }
 
@@ -178,8 +129,15 @@ public class NoteController : MonoBehaviour {
         ps.Play();
     }
 
+    public void BadNotePlayed()
+    {
+        GetComponent<SpriteRenderer>().sprite = badSprite;
+        GameLogic.GetComponent<RhythmLevelController>().BreakCombo(false);
+    }
+
     public void WrongNotePlayed()
     {
+        GetComponent<SpriteRenderer>().sprite = badSprite;
         GameLogic.GetComponent<RhythmLevelController>().BreakCombo(true);
     }
 }
