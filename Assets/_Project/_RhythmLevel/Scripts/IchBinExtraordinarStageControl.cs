@@ -50,6 +50,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     int m_Combo;
     string m_LastValidHitType;
 
+    int m_TotalNoteNum;
+    int m_CurrentStar;
+    public List<GameObject> StarIcons;
+
     public GameObject ArcoAngryBar;
     public GameObject ArcoAngryEffect;
 
@@ -61,7 +65,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         Create_SAC_ActionQueue();
         Create_AD_ActionQueue();
         Create_CH_ActionQueue();
-
     }
 	
     public void BeginActing()
@@ -70,14 +73,17 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         m_IsActing = true;
         m_Score = 0;
         m_Combo = 0;
+        m_TotalNoteNum = gameObject.GetComponent<RhythmLevelController>().GetTotalNoteNumber();
         m_LastValidHitType = "";
+        ResetAllActionCounter();
+        InitStars();
     }
 
     public void EndActing()
     {
         m_IsActing = false;
         ResultDisplayWindow.SetActive(true);
-        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = "Score:" + m_Score;
+        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = "Score:" + m_Score + "\nStar:" + m_CurrentStar;
     }
 
 	// Update is called once per frame
@@ -107,10 +113,17 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         m_NRT_Vanish_Timestamp = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitTimestamp() + NRT_DisplayTime;
     }
 
+    void ResetAllActionCounter()
+    {
+        SAC_Record.ActionCounter = 0;
+        AD_Record.ActionCounter = 0;
+        CH_Record.ActionCounter = 0;
+    }
+
     void Create_SAC_ActionQueue()
     {
         SAC_Record.ActionCounter = 0;
-        SAC_Record.KeyTimestamp = new List<float>() { 3f, 6f, 9f };
+        SAC_Record.KeyTimestamp = new List<float>() { 4.8f, 89f, 99f };
         SAC_Record.StageInstruction = new List<SAC_instruction>() { SAC_instruction.activate, SAC_instruction.deactivate, SAC_instruction.activate };
     }
 
@@ -233,8 +246,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public void NoteSuccess(string hitType, bool halfbaseScore)
     {
-        Debug.Log(hitType);
         int baseScore = 0;
+        m_Combo++;
         if (hitType == "GOOD")
         {
             m_LastValidHitType = "GOOD";
@@ -244,8 +257,11 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             m_LastValidHitType = "PERFECT";
             baseScore = 20;
+            if (m_CurrentStar < 3)
+            {
+                FillStar();
+            }
         }
-        m_Combo++;
         int finalScore = baseScore + m_Combo * getComboMultiplier();
         if (halfbaseScore)
         {
@@ -277,4 +293,20 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         }
     }
 
+    void InitStars()
+    {
+        int starHit = m_TotalNoteNum / 3;
+        m_CurrentStar = 0;
+        StarIcons[0].GetComponent<StarIconController>().Init(starHit);
+        StarIcons[1].GetComponent<StarIconController>().Init(starHit);
+        StarIcons[2].GetComponent<StarIconController>().Init(m_TotalNoteNum - starHit*2);
+    }
+
+    void FillStar()
+    {
+        if (!StarIcons[m_CurrentStar].GetComponent<StarIconController>().ReceiveHit())
+        {
+            m_CurrentStar++;
+        }
+    }
 }

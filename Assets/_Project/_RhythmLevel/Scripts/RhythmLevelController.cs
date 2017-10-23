@@ -231,6 +231,11 @@ public class RhythmLevelController : MonoBehaviour {
         return m_LastValidHit_Timestamp;
     }
 
+    public int GetTotalNoteNumber()
+    {
+        return ConstructedNote.Count;
+    }
+
     public void ReplayLevel()
     {
         Invoke("StartPlayingNote", 1f);

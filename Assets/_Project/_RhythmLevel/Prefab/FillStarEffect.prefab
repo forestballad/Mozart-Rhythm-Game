@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198692313881970552}
   - component: {fileID: 199445421766580908}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: FillStarEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

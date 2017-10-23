@@ -103,24 +103,14 @@ public class NoteController : MonoBehaviour {
         }
         if (timeDiff > HitGoodThreshold)
         {
-            Debug.Log("bad");
-            Debug.Log(timeDiff);
-            Debug.Log("largerthan");
-            Debug.Log(HitGoodThreshold);
             BadNotePlayed();
         }
         else if (timeDiff <= HitPerfectThreshold)
         {
-            Debug.Log("perfect");
-            Debug.Log(timeDiff);
-            Debug.Log("smaller than?");
-            Debug.Log(HitPerfectThreshold);
             PerfectNotePlayed(halfScore);
         }
         else
         {
-            Debug.Log("good");
-            Debug.Log(timeDiff);
             GoodNotePlayed(halfScore);
         }
     }

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4005664425644830}
   - component: {fileID: 212605254550058964}
+  - component: {fileID: 114000789171358446}
   m_Layer: 0
   m_Name: StarIcon
   m_TagString: Untagged
@@ -34,12 +35,28 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411923130696806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.46, y: 1.68, z: 0}
+  m_LocalPosition: {x: -4.38, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000789171358446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411923130696806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b7d93ddab401749995bae9700b2116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HitToFill: 0
+  m_CurrentHitReceived: 0
+  InitColor: {r: 255, g: 255, b: 255, a: 1}
+  TargetColor: {r: 1, g: 0.90588236, b: 0.5686275, a: 1}
+  CurrentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &212605254550058964
 SpriteRenderer:
   m_ObjectHideFlags: 1
