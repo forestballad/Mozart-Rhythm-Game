@@ -52,16 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfcdb3ee1c2f641b037973c41d561c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LNote: {fileID: 21300000, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  LNoteHit: {fileID: 21300006, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  RNote: {fileID: 21300002, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  RNoteHit: {fileID: 21300008, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  BNote: {fileID: 21300004, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  BNoteHit: {fileID: 21300010, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  hitSprite: {fileID: 21300006, guid: 9dbd426f784516946b69b45054cfb97b, type: 3}
-  badSprite: {fileID: 21300000, guid: eb68b8d719ad2ae48a33ce2641cea9a9, type: 3}
-  HitGoodThreshold: 0.5
-  HitPerfectThreshold: 0.3
+  LNote: {fileID: 21300000, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  LNoteHit: {fileID: 21300006, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  RNote: {fileID: 21300002, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  RNoteHit: {fileID: 21300008, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  BNote: {fileID: 21300004, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  BNoteHit: {fileID: 21300010, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  hitSprite: {fileID: 0}
+  badSprite: {fileID: 21300012, guid: 286e6980b4872f64d8c3395d95215055, type: 3}
+  m_Timestamp: 0
   vanishPoint: {fileID: 0}
   spawnPoint: {fileID: 0}
   GameLogic: {fileID: 0}

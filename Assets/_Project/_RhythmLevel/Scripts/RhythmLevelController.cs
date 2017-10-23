@@ -47,8 +47,8 @@ public class RhythmLevelController : MonoBehaviour {
     float m_LastValidHit_Timestamp;
     string m_LastValidHit_Type;
 
-    float m_HitThreshold = 0.5f;
-    float m_HitCoolDown = 0.05f;
+    float m_HitThreshold = 0.2f;
+    float m_HitCoolDown = 0.01f;
 
     public List<float> TempRecord = new List<float>();
 
@@ -60,7 +60,7 @@ public class RhythmLevelController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Invoke("StartPlayingNote",1f);
+        Invoke("StartPlayingNote",0f);
     }
 
     // Update is called once per frame
@@ -93,7 +93,10 @@ public class RhythmLevelController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L) && m_TimeStamp >= m_LastValidHit_Timestamp+m_HitCoolDown)
             {
                 int ClosetValidNoteNum = 0;
-                while( (ClosetValidNoteNum < ConstructedNote.Count && (!ConstructedNote[ClosetValidNoteNum].m_BeenSpawn || ConstructedNote[ClosetValidNoteNum].m_BeenHit)))
+                while( (ClosetValidNoteNum < ConstructedNote.Count 
+                    && (!ConstructedNote[ClosetValidNoteNum].m_BeenSpawn 
+                    || ConstructedNote[ClosetValidNoteNum].m_BeenHit 
+                    || Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - m_TimeStamp) > m_HitThreshold)))
                 {
                     ClosetValidNoteNum ++;
                 }

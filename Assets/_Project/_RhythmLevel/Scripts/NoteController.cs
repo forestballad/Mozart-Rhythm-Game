@@ -13,14 +13,14 @@ public class NoteController : MonoBehaviour {
     public Sprite hitSprite;
     public Sprite badSprite;
 
-    float m_Timestamp;
+    public float m_Timestamp;
     string m_notetype;
     float m_lifespan;
 
     float m_currentTimestamp;
 
-    public float HitGoodThreshold = 0.4f;
-    public float HitPerfectThreshold = 0.2f;
+    float HitGoodThreshold = 0.1f;
+    float HitPerfectThreshold = 0.05f;
 
     public GameObject vanishPoint;
     public GameObject spawnPoint;
@@ -86,6 +86,11 @@ public class NoteController : MonoBehaviour {
 
     public void GetHit(string hitType, float timeDiff)
     {
+        if (hitType == "3")
+        {
+            BadNotePlayed();
+            return;
+        }
         if ((hitType == "1" && m_notetype == "0") || (hitType == "0" && m_notetype == "1"))
         {
             WrongNotePlayed();
@@ -98,14 +103,24 @@ public class NoteController : MonoBehaviour {
         }
         if (timeDiff > HitGoodThreshold)
         {
+            Debug.Log("bad");
+            Debug.Log(timeDiff);
+            Debug.Log("largerthan");
+            Debug.Log(HitGoodThreshold);
             BadNotePlayed();
         }
         else if (timeDiff <= HitPerfectThreshold)
         {
+            Debug.Log("perfect");
+            Debug.Log(timeDiff);
+            Debug.Log("smaller than?");
+            Debug.Log(HitPerfectThreshold);
             PerfectNotePlayed(halfScore);
         }
         else
         {
+            Debug.Log("good");
+            Debug.Log(timeDiff);
             GoodNotePlayed(halfScore);
         }
     }
@@ -123,7 +138,7 @@ public class NoteController : MonoBehaviour {
     public void GoodNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("PERFECT", halfbaseScore);
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("GOOD", halfbaseScore);
 
         ParticleSystem ps = Instantiate(hitParticleGood);
         ps.transform.position = vanishPoint.transform.position;

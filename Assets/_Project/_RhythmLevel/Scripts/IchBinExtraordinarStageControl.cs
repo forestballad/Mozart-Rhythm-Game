@@ -51,8 +51,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     string m_LastValidHitType;
 
     public GameObject ArcoAngryBar;
-    public GameObject ArcoAngryWeak;
-    public GameObject ArcoAngryStrong;
+    public GameObject ArcoAngryEffect;
 
     public GameObject ResultDisplayWindow;
 
@@ -181,15 +180,14 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             ArcoAngryBar.transform.localScale = new Vector3(22f, 1f, 1f);
         }
 
-        if (m_Combo >= 50 && ArcoAngryStrong.activeSelf == false)
+        // todo arco angry effect
+        if (m_Combo >= 50 && ArcoAngryEffect.GetComponent<Animator>().GetInteger("AngryLevel") != 1)
         {
-            ArcoAngryStrong.SetActive(true);
-            ArcoAngryWeak.SetActive(false);
+            ArcoAngryEffect.GetComponent<Animator>().SetInteger("AngryLevel",1);
         }
-        else if (m_Combo < 50 && ArcoAngryStrong.activeSelf == true)
+        else if (m_Combo < 50 && ArcoAngryEffect.GetComponent<Animator>().GetInteger("AngryLevel") != 0)
         {
-            ArcoAngryStrong.SetActive(false);
-            ArcoAngryWeak.SetActive(true);
+            ArcoAngryEffect.GetComponent<Animator>().SetInteger("AngryLevel", 0);
         }
 
         ScoreText.GetComponent<Text>().text = "SCORE:" + m_Score.ToString();
@@ -235,6 +233,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public void NoteSuccess(string hitType, bool halfbaseScore)
     {
+        Debug.Log(hitType);
         int baseScore = 0;
         if (hitType == "GOOD")
         {
