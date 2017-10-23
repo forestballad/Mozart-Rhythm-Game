@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RhythmLevelController : MonoBehaviour {
     public AudioSource MusicPlayer;
@@ -10,7 +9,7 @@ public class RhythmLevelController : MonoBehaviour {
 
     public enum GameState
     {
-        idle, recording, playing
+        idle, recording, playing, result
     }
     public GameState CurrentGameState;
 
@@ -55,12 +54,13 @@ public class RhythmLevelController : MonoBehaviour {
 
     void Awake()
     {
-        CurrentGameState = GameState.idle;
         ConstructedNote = new List<Note>();
+        CurrentGameState = GameState.idle;
     }
 
     // Use this for initialization
     void Start() {
+        Invoke("StartPlayingNote",1f);
     }
 
     // Update is called once per frame
@@ -92,7 +92,6 @@ public class RhythmLevelController : MonoBehaviour {
             #region CatchHitting
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L) && m_TimeStamp >= m_LastValidHit_Timestamp+m_HitCoolDown)
             {
-                List<Note> PotentialAffectedNotes = new List<Note>();
                 int ClosetValidNoteNum = 0;
                 while( (ClosetValidNoteNum < ConstructedNote.Count && (!ConstructedNote[ClosetValidNoteNum].m_BeenSpawn || ConstructedNote[ClosetValidNoteNum].m_BeenHit)))
                 {
@@ -145,11 +144,15 @@ public class RhythmLevelController : MonoBehaviour {
             }
 
             #endregion
-            if (CurrentGameState == GameState.playing && !MusicPlayer.isPlaying)
+            if (CurrentGameState == GameState.playing && m_TimeStamp > TheSong.length)
             {
-                CurrentGameState = GameState.idle;
+                CurrentGameState = GameState.result;
+                foreach (Transform item in NoteContainer.transform)
+                {
+                    Destroy(item.gameObject);
+                }
+                GetComponent<IchBinExtraordinarStageControl>().EndActing();
             }
-
         }
     }
 
@@ -159,6 +162,10 @@ public class RhythmLevelController : MonoBehaviour {
         ConstructNoteBasedOnRawJson();
         CurrentGameState = GameState.playing;
         MusicPlayer.Play();
+        foreach (Transform item in NoteContainer.transform)
+        {
+            Destroy(item.gameObject);
+        }
 
         GetComponent<IchBinExtraordinarStageControl>().BeginActing();
     }
@@ -221,4 +228,13 @@ public class RhythmLevelController : MonoBehaviour {
         return m_LastValidHit_Timestamp;
     }
 
+    public void ReplayLevel()
+    {
+        Invoke("StartPlayingNote", 1f);
+    }
+
+    public void ReturnToTitleScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 }

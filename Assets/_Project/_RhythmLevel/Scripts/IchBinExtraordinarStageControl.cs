@@ -54,6 +54,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ArcoAngryWeak;
     public GameObject ArcoAngryStrong;
 
+    public GameObject ResultDisplayWindow;
+
     // Use this for initialization
     void Start () {
         m_IsActing = false;
@@ -65,10 +67,17 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 	
     public void BeginActing()
     {
+        ResultDisplayWindow.SetActive(false);
         m_IsActing = true;
         m_Score = 0;
         m_Combo = 0;
         m_LastValidHitType = "";
+    }
+
+    public void EndActing()
+    {
+        m_IsActing = false;
+        ResultDisplayWindow.SetActive(true);
     }
 
 	// Update is called once per frame

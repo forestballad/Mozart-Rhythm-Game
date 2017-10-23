@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/RhythmLevel.unity
+    path: Assets/_Project/_RhythmLevel/IBETitleScene.unity
+    guid: 282b9de95eac38447ad9b205dfa88c5e
+  - enabled: 1
+    path: Assets/_Project/_RhythmLevel/IchBinExtraordinar.unity
     guid: 7146ea6bd1a60e44a9a8e662e131f604
