@@ -78,6 +78,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     {
         m_IsActing = false;
         ResultDisplayWindow.SetActive(true);
+        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = "Score:" + m_Score;
     }
 
 	// Update is called once per frame

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 
 public class TitleScene : MonoBehaviour {
 
@@ -17,7 +16,7 @@ public class TitleScene : MonoBehaviour {
 
     public void LoadRhythmLevel()
     {
-        EditorSceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
 }
