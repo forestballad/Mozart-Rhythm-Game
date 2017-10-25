@@ -48,7 +48,7 @@ public class RhythmLevelController : MonoBehaviour {
     string m_LastValidHit_Type;
 
     float m_HitThreshold = 0.2f;
-    float m_HitCoolDown = 0.01f;
+    float m_HitCoolDown = 0f;
 
     public List<float> TempRecord = new List<float>();
 
@@ -207,12 +207,14 @@ public class RhythmLevelController : MonoBehaviour {
         RawNoteRecord savedNotes = JsonUtility.FromJson<RawNoteRecord>(hardcodejson);
 
         int noteNum = savedNotes.TimestampList.Count;
+        List<float> unNomarlized = savedNotes.TimestampList;
+        List<float> Normalized = NormalizeTimestamp(unNomarlized);
 
         ConstructedNote.Clear();
 
         for (int i = 0; i < noteNum;i++)
         {
-            Note newNote = new Note(savedNotes.TimestampList[i], savedNotes.NoteTypeList[i]);
+            Note newNote = new Note(Normalized[i], savedNotes.NoteTypeList[i]);
             if (savedNotes.TimestampList[i] > 90)
             {
                 newNote.m_Lifespan = 1.5f;
@@ -244,5 +246,19 @@ public class RhythmLevelController : MonoBehaviour {
     public void ReturnToTitleScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    List<float> NormalizeTimestamp(List<float> inputList)
+    {
+        List<float> returnList = new List<float>();
+        for (int i = 0; i < inputList.Count; i++)
+        {
+            float ok = inputList[i] / (0.375f / 4);
+            int raw = (int)Mathf.Round(ok);
+            float unraw = raw * (0.375f/4);
+            returnList.Add(unraw);
+        }
+
+        return returnList;
     }
 }
