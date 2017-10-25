@@ -282,6 +282,11 @@ public class NoteEditor : MonoBehaviour {
 
     public void StartRecording()
     {
+        foreach (Transform item in NoteContainer.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        MusicPlayer.Stop();
         foreach (Transform item in TimeControllerButtons.transform)
         {
             if (item.GetComponent<Button>() != null)

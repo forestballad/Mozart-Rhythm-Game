@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9d6ff4e0bef52a34aa7e6ae3877eb702
-timeCreated: 1508405790
+guid: 60b52c37fef2fc64b801742c01ceabaa
+timeCreated: 1508960774
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: Mozart_1
     21300004: Mozart_2
     21300006: Mozart_3
+    21300008: Mozart_4
+    21300010: Mozart_5
+    21300012: Mozart_6
+    21300014: Mozart_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -95,7 +99,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 180
         width: 110
         height: 180
       alignment: 0
@@ -109,7 +113,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 110
-        y: 0
+        y: 180
         width: 110
         height: 180
       alignment: 0
@@ -123,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 220
-        y: 0
+        y: 180
         width: 110
         height: 180
       alignment: 0
@@ -134,6 +138,62 @@ TextureImporter:
       tessellationDetail: 0
     - serializedVersion: 2
       name: Mozart_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 180
+        width: 110
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mozart_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 110
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mozart_5
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 0
+        width: 110
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mozart_6
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0
+        width: 110
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mozart_7
       rect:
         serializedVersion: 2
         x: 330

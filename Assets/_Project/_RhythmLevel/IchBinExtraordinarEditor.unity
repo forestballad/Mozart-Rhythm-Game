@@ -1241,7 +1241,7 @@ SpriteRenderer:
   m_SortingLayerID: 1996243781
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f3800ceadf7dc4d428eb4f8daf439379, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dcdf853edb3a4243b28cf2f9771b0e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4923,8 +4923,8 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Editor State:'
 --- !u!222 &1759964753
