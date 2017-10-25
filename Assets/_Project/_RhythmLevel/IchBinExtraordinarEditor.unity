@@ -383,7 +383,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 108646323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517586655}
+        m_MethodName: CloseNoteEditWindowWithSavedChanges
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &108646323
@@ -578,7 +589,7 @@ GameObject:
   - component: {fileID: 248824197}
   - component: {fileID: 248824196}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LifespanInputFieldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +842,7 @@ GameObject:
   - component: {fileID: 380673161}
   - component: {fileID: 380673160}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TimestampInputFieldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1692,7 +1703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577396209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1986,7 +1997,7 @@ GameObject:
   - component: {fileID: 789930764}
   - component: {fileID: 789930763}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: LifespanInputFieldPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3433,7 +3444,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1420373514}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517586655}
+        m_MethodName: NormalizeNote
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1420373514
@@ -4695,7 +4717,7 @@ GameObject:
   - component: {fileID: 1829354276}
   - component: {fileID: 1829354275}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: TimestampInputFieldPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
