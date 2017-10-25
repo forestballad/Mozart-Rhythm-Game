@@ -57,6 +57,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ArcoAngryBar;
     public GameObject ArcoAngryEffect;
 
+    public GameObject RecText;
+
     public GameObject ResultDisplayWindow;
     public GameObject CreditWindow;
 
@@ -67,8 +69,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         Create_AD_ActionQueue();
         Create_CH_ActionQueue();
     }
-	
-    public void BeginActing()
+
+    public void BeginActing(bool PlayingRecord)
     {
         ResultDisplayWindow.SetActive(false);
         m_IsActing = true;
@@ -78,6 +80,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         m_LastValidHitType = "";
         ResetAllActionCounter();
         InitStars();
+        if (PlayingRecord)
+        {
+            RecText.SetActive(true);
+        }
     }
 
     public void EndActing()
@@ -86,6 +92,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         ResultDisplayWindow.SetActive(true);
         GameObject.Find("GameResultScoreText").GetComponent<Text>().text = m_Score.ToString();
         CreditWindow.SetActive(false);
+        RecText.SetActive(false);
     }
 
 	// Update is called once per frame
