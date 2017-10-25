@@ -43,22 +43,64 @@ public class NoteEditor : MonoBehaviour {
     public Transform SpawnLoc;
     public Transform VanishLoc;
 
+    public GameObject NoteContainer;
     public GameObject NotePrefab;
     public GameObject NoteEditWindow;
-    public GameObject NoteContainer;
+
+    public GameObject TimeControllerButtons;
+    public GameObject DataControllerButtons;
 
     int m_currentEditingIndex = -1;
+
+    enum State
+    {
+        Idle , Recording, Editing
+    }
+    State EditorState;
 
     // Use this for initialization
     void Start () {
         NoteEditWindow.SetActive(false);
         MusicPlayer.time = 0;
+        EditorState = State.Idle;
+        GameObject.Find("CurrentEditorState").GetComponent<Text>().text = "Editor State: Idle";
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         GameObject.Find("CurrentTime").GetComponent<Text>().text = "Current Time: " + MusicPlayer.time;
-        SycnNoteLocation();
+        if (EditorState == State.Editing)
+        {
+            SycnNoteLocation();
+        }
+
+        if (EditorState == State.Recording)
+        {
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.B))
+            {
+                string noteType = "";
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    noteType = "0";
+                }
+                else if (Input.GetKeyDown(KeyCode.L))
+                {
+                    noteType = "1";
+                }
+                else
+                {
+                    noteType = "2";
+                }
+
+                EditableNote newNote = new EditableNote(ConstructedNote.Count, MusicPlayer.time, noteType, 2f);
+                ConstructedNote.Add(newNote);
+                GameObject.Find("CurrentTotalNoteNum").GetComponent<Text>().text = "Total Note: " + ConstructedNote.Count;
+            }
+            if (MusicPlayer.time >= 120)
+            {
+                StopRecording();
+            }
+        }
     }
 
     public void SetMusicTime(float TargetTime)
@@ -138,8 +180,8 @@ public class NoteEditor : MonoBehaviour {
 
     public void CloseNoteEditWindow()
     {
+        GameObject.Find("TimestampInputField").GetComponent<InputField>().text = "";
         NoteEditWindow.SetActive(false);
-        PlayMusic();
     }
 
     public void CloseNoteEditWindowWithSavedChanges()
@@ -166,6 +208,7 @@ public class NoteEditor : MonoBehaviour {
 
     public void ConstructNoteFromFile()
     {
+        MusicPlayer.Stop();
         foreach (Transform item in NoteContainer.transform)
         {
             Destroy(item.gameObject);
@@ -198,6 +241,8 @@ public class NoteEditor : MonoBehaviour {
             ConstructedNote.Add(newNote);
         }
         GameObject.Find("CurrentTotalNoteNum").GetComponent<Text>().text = "Total Note: " + ConstructedNote.Count;
+        EditorState = State.Editing;
+        GameObject.Find("CurrentEditorState").GetComponent<Text>().text = "Editor State: Editing";
     }
 
     public void SaveCurrentConstructedNote()
@@ -233,5 +278,68 @@ public class NoteEditor : MonoBehaviour {
     {
         float Normalized = (Mathf.Round(ConstructedNote[m_currentEditingIndex].m_Timestamp / (0.375f / 4))) * (0.375f / 4);
         GameObject.Find("TimestampInputField").GetComponent<InputField>().text = Normalized.ToString();
+    }
+
+    public void StartRecording()
+    {
+        foreach (Transform item in TimeControllerButtons.transform)
+        {
+            if (item.GetComponent<Button>() != null)
+            {
+                item.GetComponent<Button>().interactable = false;
+            }
+            if (item.GetComponent<InputField>()!= null)
+            {
+                item.GetComponent<InputField>().interactable = false;
+            }
+        }
+        foreach (Transform item in DataControllerButtons.transform)
+        {
+            if (item.GetComponent<Button>() != null)
+            {
+                item.GetComponent<Button>().interactable = false;
+            }
+            if (item.GetComponent<InputField>() != null)
+            {
+                item.GetComponent<InputField>().interactable = false;
+            }
+        }
+        EditorState = State.Recording;
+        GameObject.Find("CurrentEditorState").GetComponent<Text>().text = "Editor State: Recording";
+        GameObject.Find("RecordButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("StopRecordButton").GetComponent<Button>().interactable = true;
+        MusicPlayer.Play();
+    }
+
+    public void StopRecording()
+    {
+        foreach (Transform item in TimeControllerButtons.transform)
+        {
+            if (item.GetComponent<Button>() != null)
+            {
+                item.GetComponent<Button>().interactable = true;
+            }
+            if (item.GetComponent<InputField>() != null)
+            {
+                item.GetComponent<InputField>().interactable = true;
+            }
+        }
+        foreach (Transform item in DataControllerButtons.transform)
+        {
+            if (item.GetComponent<Button>() != null)
+            {
+                item.GetComponent<Button>().interactable = true;
+            }
+            if (item.GetComponent<InputField>() != null)
+            {
+                item.GetComponent<InputField>().interactable = true;
+            }
+        }
+        EditorState = State.Idle;
+        GameObject.Find("CurrentEditorState").GetComponent<Text>().text = "Editor State: Idle";
+        MusicPlayer.Stop();
+        GameObject.Find("StopRecordButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("RecordButton").GetComponent<Button>().interactable = true;
+
     }
 }
