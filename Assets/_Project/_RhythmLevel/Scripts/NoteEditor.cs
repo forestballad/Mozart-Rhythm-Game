@@ -197,10 +197,12 @@ public class NoteEditor : MonoBehaviour {
             newNote.m_GameObject = newNoteGameObject;
             ConstructedNote.Add(newNote);
         }
+        GameObject.Find("CurrentTotalNoteNum").GetComponent<Text>().text = "Total Note: " + ConstructedNote.Count;
     }
 
     public void SaveCurrentConstructedNote()
     {
+        PauseMusic();
         RawNoteRecord ConstructedRaw = new RawNoteRecord();
         for (int i = 0; i < ConstructedNote.Count; i++)
         {
