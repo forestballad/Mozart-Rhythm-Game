@@ -58,6 +58,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ArcoAngryEffect;
 
     public GameObject ResultDisplayWindow;
+    public GameObject CreditWindow;
 
     // Use this for initialization
     void Start () {
@@ -83,7 +84,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     {
         m_IsActing = false;
         ResultDisplayWindow.SetActive(true);
-        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = "Score:" + m_Score + "\nStar:" + m_CurrentStar;
+        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = m_Score.ToString();
+        CreditWindow.SetActive(false);
     }
 
 	// Update is called once per frame
@@ -308,5 +310,15 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             m_CurrentStar++;
         }
+    }
+
+    public void OpenCreditWindow()
+    {
+        CreditWindow.SetActive(true);
+    }
+
+    public void CloseCreditWindow()
+    {
+        CreditWindow.SetActive(false);
     }
 }
