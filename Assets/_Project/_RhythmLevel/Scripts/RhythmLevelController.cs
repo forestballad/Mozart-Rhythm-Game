@@ -56,8 +56,8 @@ public class RhythmLevelController : MonoBehaviour
 
     float m_LastValidHit_Timestamp;
 
-    float m_HitThreshold = 0.2f;
-    float m_HitCoolDown = 0f;
+    float m_HitThreshold = 0.12f;
+    float m_HitCoolDown = 0.05f;
 
     void Awake()
     {
