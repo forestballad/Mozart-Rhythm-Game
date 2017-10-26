@@ -35,6 +35,7 @@ public class StarIconController : MonoBehaviour {
 
         if (m_CurrentHitReceived == m_HitToFill)
         {
+            GetComponent<Animator>().SetBool("IsActive", true);
             return false;
         }
         else

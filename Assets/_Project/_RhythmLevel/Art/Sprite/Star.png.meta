@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 60b52c37fef2fc64b801742c01ceabaa
-timeCreated: 1508960774
+guid: 298b613e79618134bba2cd29d0307084
+timeCreated: 1508987591
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Mozart_0
-    21300002: Mozart_1
-    21300004: Mozart_2
-    21300006: Mozart_3
-    21300008: Mozart_4
-    21300010: Mozart_5
-    21300012: Mozart_6
-    21300014: Mozart_7
+    21300000: Star_0
+    21300002: Star_1
+    21300004: Star_2
+    21300006: Star_3
+    21300008: Star_4
+    21300010: Star_5
+    21300012: Star_6
+    21300014: Star_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -95,68 +95,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mozart_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 180
-        width: 110
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Mozart_1
-      rect:
-        serializedVersion: 2
-        x: 110
-        y: 180
-        width: 110
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Mozart_2
-      rect:
-        serializedVersion: 2
-        x: 220
-        y: 180
-        width: 110
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Mozart_3
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 180
-        width: 110
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Mozart_4
+      name: Star_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 110
+        width: 140
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -165,12 +109,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Mozart_5
+      name: Star_1
       rect:
         serializedVersion: 2
-        x: 110
+        x: 140
         y: 0
-        width: 110
+        width: 140
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -179,12 +123,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Mozart_6
+      name: Star_2
       rect:
         serializedVersion: 2
-        x: 220
+        x: 280
         y: 0
-        width: 110
+        width: 140
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -193,12 +137,68 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Mozart_7
+      name: Star_3
       rect:
         serializedVersion: 2
-        x: 330
+        x: 420
         y: 0
-        width: 110
+        width: 140
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Star_4
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 140
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Star_5
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 140
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Star_6
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 140
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Star_7
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 0
+        width: 140
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}

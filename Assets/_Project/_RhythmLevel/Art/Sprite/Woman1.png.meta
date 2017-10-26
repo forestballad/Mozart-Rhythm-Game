@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 9dbd426f784516946b69b45054cfb97b
-timeCreated: 1508223985
+guid: 94d72b5a7f358934da965c32c3b9f9a6
+timeCreated: 1508976067
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Note_L
-    21300002: Note_R
-    21300004: Note_B
-    21300006: Note_L_Hit
-    21300008: Note_R_Hit
-    21300010: Note_B_Hit
-    21300012: Star_Filled
-    21300014: Star_Empty
+    21300000: Women1_0
+    21300002: Women1_1
+    21300004: Women1_2
+    21300006: Women1_3
+    21300008: Woman1_0
+    21300010: Woman1_1
+    21300012: Woman1_2
+    21300014: Woman1_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -95,113 +95,57 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Note_L
+      name: Woman1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 88.375
-        height: 121
+        width: 130
+        height: 210
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Note_R
+      name: Woman1_1
       rect:
         serializedVersion: 2
-        x: 88
+        x: 130
         y: 0
-        width: 88.375
-        height: 121
+        width: 130
+        height: 210
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Note_B
+      name: Woman1_2
       rect:
         serializedVersion: 2
-        x: 176
+        x: 260
         y: 0
-        width: 88.375
-        height: 121
+        width: 130
+        height: 210
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Note_L_Hit
+      name: Woman1_3
       rect:
         serializedVersion: 2
-        x: 264
+        x: 390
         y: 0
-        width: 88.375
-        height: 121
+        width: 130
+        height: 210
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Note_R_Hit
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 0
-        width: 88.375
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Note_B_Hit
-      rect:
-        serializedVersion: 2
-        x: 440
-        y: 0
-        width: 88.375
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Star_Filled
-      rect:
-        serializedVersion: 2
-        x: 528
-        y: 0
-        width: 88.375
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Star_Empty
-      rect:
-        serializedVersion: 2
-        x: 616
-        y: 0
-        width: 88.375
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -173,7 +173,7 @@ public class RhythmLevelController : MonoBehaviour
 
             #endregion
 
-            if (m_TimeStamp > 10)
+            if (m_TimeStamp == TheSong.length)
             {
                 MusicPlayer.Stop();
                 CurrentGameState = GameState.result;

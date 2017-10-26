@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4e3ac0a02006aac4ebc9dba6a5dc7a22
-timeCreated: 1508960928
+timeCreated: 1508976080
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: Women2_1
     21300004: Women2_2
     21300006: Women2_3
+    21300008: Woman2_0
+    21300010: Woman2_1
+    21300012: Woman2_2
+    21300014: Woman2_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -91,7 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Women2_0
+      name: Woman2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,7 +109,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Women2_1
+      name: Woman2_1
       rect:
         serializedVersion: 2
         x: 130
@@ -119,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Women2_2
+      name: Woman2_2
       rect:
         serializedVersion: 2
         x: 260
@@ -133,7 +137,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Women2_3
+      name: Woman2_3
       rect:
         serializedVersion: 2
         x: 390
