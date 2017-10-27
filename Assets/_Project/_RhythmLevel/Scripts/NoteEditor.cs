@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NoteEditor : MonoBehaviour {
     public AudioSource MusicPlayer;
-
+    public AudioClip TheSong;
     public class RawNoteRecord
     {
         public List<float> TimestampList;
@@ -96,7 +96,7 @@ public class NoteEditor : MonoBehaviour {
                 ConstructedNote.Add(newNote);
                 GameObject.Find("CurrentTotalNoteNum").GetComponent<Text>().text = "Total Note: " + ConstructedNote.Count;
             }
-            if (MusicPlayer.time >= 120)
+            if (MusicPlayer.time >= TheSong.length)
             {
                 StopRecording();
             }

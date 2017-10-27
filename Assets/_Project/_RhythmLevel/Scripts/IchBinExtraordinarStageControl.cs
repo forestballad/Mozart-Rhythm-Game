@@ -54,6 +54,14 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ResultDisplayWindow;
     public GameObject CreditWindow;
 
+    public GameObject PauseWindow;
+
+    public ParticleSystem hitParticleGood;
+    public ParticleSystem hitParticlePerfect;
+    public ParticleSystem starFillingEffect;
+
+    public GameObject StarFillingSpawnLoc;
+
     // Use this for initialization
     void Start () {
         m_IsActing = false;
@@ -176,15 +184,27 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             m_LastValidHitType = "GOOD";
             baseScore = 10;
+
+            ParticleSystem ps = Instantiate(hitParticleGood);
+            ps.transform.position = GameObject.Find("NoteEndLoc").transform.position;
+            ps.Play();
         }
         else if (hitType == "PERFECT")
         {
             m_LastValidHitType = "PERFECT";
+
+            
             baseScore = 20;
             if (m_CurrentStar < 3)
             {
                 FillStar();
             }
+
+            ParticleSystem ps = Instantiate(hitParticlePerfect);
+            ps.transform.position = GameObject.Find("NoteEndLoc").transform.position;
+            ps.Play();
+
+           
         }
         int finalScore = baseScore + m_Combo * getComboMultiplier();
         if (halfbaseScore)
@@ -227,9 +247,9 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     {
         int starHit = m_TotalNoteNum / 3;
         m_CurrentStar = 0;
-        StarIcons[0].GetComponent<StarIconController>().Init(10);
-        StarIcons[1].GetComponent<StarIconController>().Init(10);
-        StarIcons[2].GetComponent<StarIconController>().Init(10);//m_TotalNoteNum - starHit*2);
+        StarIcons[0].GetComponent<StarIconController>().Init(starHit);
+        StarIcons[1].GetComponent<StarIconController>().Init(starHit);
+        StarIcons[2].GetComponent<StarIconController>().Init(m_TotalNoteNum - starHit * 2);
 
         for (int i = 0; i < 3; i++)
         {
@@ -241,10 +261,14 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     void FillStar()
     {
+        ParticleSystem ps = Instantiate(starFillingEffect);
+        ps.GetComponent<StarFillingParticle>().Init(StarFillingSpawnLoc.transform.position, StarIcons[m_CurrentStar].transform.position);
+        ps.Play();
         if (!StarIcons[m_CurrentStar].GetComponent<StarIconController>().ReceiveHit())
         {
             m_CurrentStar++;
         }
+
     }
 
     public void OpenCreditWindow()
@@ -324,5 +348,21 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         AmadeDrum.GetComponent<Animator>().SetBool("IsActive", false);
         MozartGuitar.GetComponent<Animator>().SetBool("IsActive", false);
         CaciliaHorn.GetComponent<Animator>().SetBool("IsActive", false);
+    }
+
+    void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            Debug.Log("pause here");
+        }
+    }
+
+    void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            Debug.Log("Pause here?");
+        }
     }
 }

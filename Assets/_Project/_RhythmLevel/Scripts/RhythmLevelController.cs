@@ -75,7 +75,7 @@ public class RhythmLevelController : MonoBehaviour
     {
         if (CurrentGameState == GameState.playing || CurrentGameState == GameState.record)
         {
-            m_TimeStamp =MusicPlayer.time;
+            m_TimeStamp = MusicPlayer.time;
 
             #region SpawnNote
             for (int i = 0; i < ConstructedNote.Count; i++)
@@ -173,7 +173,7 @@ public class RhythmLevelController : MonoBehaviour
 
             #endregion
 
-            if (m_TimeStamp == TheSong.length)
+            if (m_TimeStamp >= TheSong.length)
             {
                 MusicPlayer.Stop();
                 CurrentGameState = GameState.result;
@@ -196,7 +196,7 @@ public class RhythmLevelController : MonoBehaviour
             Destroy(item.gameObject);
         }
         PlayerInputRecord = new RawNoteRecord();
-        m_LastValidHit_Timestamp = 0;
+        m_TimeStamp = 0;
         GetComponent<IchBinExtraordinarStageControl>().BeginActing(false);
     }
 

@@ -33,8 +33,7 @@ public class NoteController : MonoBehaviour {
     Vector3 m_VanishLoc;
 
 
-    public ParticleSystem hitParticleGood;
-    public ParticleSystem hitParticlePerfect;
+   
 
     // Use this for initialization
 
@@ -119,20 +118,12 @@ public class NoteController : MonoBehaviour {
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
         GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("PERFECT", halfbaseScore);
-
-        ParticleSystem ps = Instantiate(hitParticlePerfect);
-        ps.transform.position = vanishPoint.transform.position;
-        ps.Play();
     }
 
     public void GoodNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
         GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("GOOD", halfbaseScore);
-
-        ParticleSystem ps = Instantiate(hitParticleGood);
-        ps.transform.position = vanishPoint.transform.position;
-        ps.Play();
     }
 
     public void BadNotePlayed()
