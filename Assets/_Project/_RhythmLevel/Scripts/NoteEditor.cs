@@ -52,6 +52,8 @@ public class NoteEditor : MonoBehaviour {
 
     int m_currentEditingIndex = -1;
 
+    float BPM = 162f;
+
     enum State
     {
         Idle , Recording, Editing
@@ -274,9 +276,9 @@ public class NoteEditor : MonoBehaviour {
         }
     }
 
-    public void NormalizeNote()
+    public void NormalizeNote(int accuracy)
     {
-        float Normalized = (Mathf.Round(ConstructedNote[m_currentEditingIndex].m_Timestamp / (0.375f / 4))) * (0.375f / 4);
+        float Normalized = (Mathf.Round(ConstructedNote[m_currentEditingIndex].m_Timestamp / (60/BPM / accuracy))) * (60 / BPM / accuracy);
         GameObject.Find("TimestampInputField").GetComponent<InputField>().text = Normalized.ToString();
     }
 

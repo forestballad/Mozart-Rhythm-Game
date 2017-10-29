@@ -10,9 +10,10 @@ public class RhythmLevelController : MonoBehaviour
 
     public enum GameState
     {
-        idle, playing, result, record
+        idle, playing, result, record, pause
     }
     public GameState CurrentGameState;
+    public GameState ReturnFromPauseState;
 
     class Note
     {
@@ -262,8 +263,16 @@ public class RhythmLevelController : MonoBehaviour
         Invoke("StartPlayingGame", 1f);
     }
 
-    public void ReturnToTitleScene()
+    public void PauseGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        ReturnFromPauseState = CurrentGameState;
+        CurrentGameState = GameState.pause;
+        MusicPlayer.Pause();
+    }
+
+    public void UnPauseGame()
+    {
+        CurrentGameState = ReturnFromPauseState;
+        MusicPlayer.Play();
     }
 }

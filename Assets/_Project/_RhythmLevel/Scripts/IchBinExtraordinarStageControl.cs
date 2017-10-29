@@ -349,20 +349,4 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         MozartGuitar.GetComponent<Animator>().SetBool("IsActive", false);
         CaciliaHorn.GetComponent<Animator>().SetBool("IsActive", false);
     }
-
-    void OnApplicationFocus(bool focus)
-    {
-        if (!focus)
-        {
-            Debug.Log("pause here");
-        }
-    }
-
-    void OnApplicationPause(bool pause)
-    {
-        if (pause)
-        {
-            Debug.Log("Pause here?");
-        }
-    }
 }
