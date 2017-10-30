@@ -32,9 +32,6 @@ public class NoteController : MonoBehaviour {
     Vector3 m_SpawnLoc;
     Vector3 m_VanishLoc;
 
-
-   
-
     // Use this for initialization
 
     void Start () {

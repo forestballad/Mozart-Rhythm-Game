@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GenericeLevelController : MonoBehaviour {
-    RhythmLevelController h_SpecificLevelController;
-    IchBinExtraordinarStageControl h_StageActor;
+    public RhythmLevelController h_SpecificLevelController;
+    public IchBinExtraordinarStageControl h_StageActor;
 
     public GameObject PauseGameWindow;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        PauseGameWindow.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update () {
+		if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
 	}
 
     public void ReturnToTitleScene()
@@ -27,7 +30,7 @@ public class GenericeLevelController : MonoBehaviour {
     {
         if (!focus)
         {
-            PauseCurrentGame();
+            Pause();
         }
     }
 
@@ -35,13 +38,19 @@ public class GenericeLevelController : MonoBehaviour {
     {
         if (pause)
         {
-            PauseCurrentGame();
+            Pause();
         }
     }
 
-    void PauseCurrentGame()
+    void Pause()
     {
-        //h_SpecificLevelController.PauseGame();
-        //PauseGameWindow.SetActive(true);
+        h_SpecificLevelController.Pause();
+        PauseGameWindow.SetActive(true);
+    }
+
+    public void UnPause()
+    {
+        h_SpecificLevelController.UnPause();
+        PauseGameWindow.SetActive(false);
     }
 }
