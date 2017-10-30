@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class IchBinExtraordinarStageControl : MonoBehaviour {
-    public GameObject GameLogic;
+    public RhythmLevelController h_SpecificLevelController;
     float m_TimeStamp;
     bool m_IsActing;
 
@@ -74,11 +74,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public void BeginActing(bool PlayingRecord)
     {
         StageLight.SetActive(false);
-        ResultDisplayWindow.SetActive(false);
         m_IsActing = true;
         m_Score = 0;
         m_Combo = 0;
-        m_TotalNoteNum = gameObject.GetComponent<RhythmLevelController>().GetTotalNoteNumber();
+        m_TotalNoteNum = h_SpecificLevelController.GetTotalNoteNumber();
         m_LastValidHitType = "";
         NoteResultText.GetComponent<Text>().text = "";
         StageAnimationInstruction.counter = 0;
@@ -91,10 +90,9 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public void EndActing()
     {
-        m_IsActing = false;
-        ResultDisplayWindow.SetActive(true);
-        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = m_Score.ToString();
         CreditWindow.SetActive(false);
+        m_IsActing = false;
+        GameObject.Find("GameResultScoreText").GetComponent<Text>().text = m_Score.ToString();
         RecText.SetActive(false);
     }
 
@@ -113,8 +111,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     void SyncDataWithGameLogic()
     {
-        m_TimeStamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
-        m_NRT_Vanish_Timestamp = GameLogic.GetComponent<RhythmLevelController>().GetLastValidHitTimestamp() + NRT_DisplayTime;
+        m_TimeStamp = h_SpecificLevelController.GetCurrentTimestamp();
+        m_NRT_Vanish_Timestamp = h_SpecificLevelController.GetLastValidHitTimestamp() + NRT_DisplayTime;
     }
 
     void UpdateScoreAndCombo()
@@ -268,7 +266,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             m_CurrentStar++;
         }
-
     }
 
     public void OpenCreditWindow()

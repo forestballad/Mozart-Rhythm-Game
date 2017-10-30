@@ -6,18 +6,19 @@ public class GenericeLevelController : MonoBehaviour {
     public RhythmLevelController h_SpecificLevelController;
     public IchBinExtraordinarStageControl h_StageActor;
 
+    public GameObject ResultDisplayWindow;
     public GameObject PauseGameWindow;
 
 	// Use this for initialization
 	void Start () {
-        PauseGameWindow.SetActive(false);
+        StartGame();
     }
 
     // Update is called once per frame
     void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            PauseGame();
         }
 	}
 
@@ -30,7 +31,7 @@ public class GenericeLevelController : MonoBehaviour {
     {
         if (!focus)
         {
-            Pause();
+            PauseGame();
         }
     }
 
@@ -38,19 +39,37 @@ public class GenericeLevelController : MonoBehaviour {
     {
         if (pause)
         {
-            Pause();
+            PauseGame();
         }
     }
 
-    void Pause()
+    public void PauseGame()
     {
         h_SpecificLevelController.Pause();
         PauseGameWindow.SetActive(true);
     }
 
-    public void UnPause()
+    public void UnPauseGame()
     {
-        h_SpecificLevelController.UnPause();
         PauseGameWindow.SetActive(false);
+        h_SpecificLevelController.UnPause();
+    }
+
+    public void StartGame()
+    {
+        ResultDisplayWindow.SetActive(false);
+        PauseGameWindow.SetActive(false);
+        h_SpecificLevelController.PlayLevel();
+    }
+
+    public void ReplayGame()
+    {
+        PauseGameWindow.SetActive(false);
+        h_SpecificLevelController.PlayLevel();
+    }
+
+    public void EndGame()
+    {
+        ResultDisplayWindow.SetActive(true);
     }
 }
