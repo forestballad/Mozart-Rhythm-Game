@@ -29,6 +29,7 @@ public class CaciliaController : MonoBehaviour {
     void Update() {
         if (m_IsActing)
         {
+            m_Timestamp = h_LevelController.GetCurrentTimestamp();
             if ((HornBlowCount < HornTimestamp.Count) && (m_Timestamp >= HornTimestamp[HornBlowCount]))
             {
                 Horn.SetActive(true);
@@ -39,7 +40,6 @@ public class CaciliaController : MonoBehaviour {
                     m_IsActing = false;
                 }
             }
-            m_Timestamp = h_LevelController.GetCurrentTimestamp();
         }
     }
 
@@ -47,6 +47,7 @@ public class CaciliaController : MonoBehaviour {
     {
         m_IsActing = true;
         HornBlowCount = 0;
+        Horn.SetActive(false);
     }
 
     IEnumerator DisableHorn()

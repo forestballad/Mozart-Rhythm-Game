@@ -43,8 +43,16 @@ public class NoteController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        m_currentTimestamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
-        transform.position = GetLocByTimetamp();
+        
+    }
+
+    public void ManualUpdate()
+    {
+        if (GameLogic != null)
+        {
+            m_currentTimestamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
+            transform.position = GetLocByTimetamp();
+        }
     }
 
     public void Init(float timestamp, string inputNoteType, float lifespan)
@@ -82,7 +90,7 @@ public class NoteController : MonoBehaviour {
     {
         if (hitType == "3")
         {
-            BadNotePlayed();
+            MissNote();
             return;
         }
         if ((hitType == "1" && m_notetype == "0") || (hitType == "0" && m_notetype == "1"))
@@ -125,6 +133,11 @@ public class NoteController : MonoBehaviour {
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
         GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("BAD");
+    }
+
+    public void MissNote()
+    {
+        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("MISS");
     }
 
     public void WrongNotePlayed()

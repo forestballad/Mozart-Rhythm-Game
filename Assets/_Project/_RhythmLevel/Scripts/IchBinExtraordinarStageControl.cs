@@ -101,6 +101,11 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     }
 
 	void Update () {
+       
+	}
+
+    public void ManualUpdate()
+    {
         if (m_IsActing)
         {
             SyncDataWithGameLogic();
@@ -111,11 +116,11 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             }
             UpdateScoreAndCombo();
         }
-	}
+    }
 
     void SyncDataWithGameLogic()
     {
-        m_TimeStamp = h_SpecificLevelController.GetCurrentTimestamp();
+        m_TimeStamp = h_SpecificLevelController.MusicPlayer.time;
         m_NRT_Vanish_Timestamp = h_SpecificLevelController.GetLastValidHitTimestamp() + NRT_DisplayTime;
     }
 
@@ -217,6 +222,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         if (hitType == "BAD")
         {
             m_Score += 5 * 100;
+        }
+        else if (hitType == "WRONG")
+        {
+            m_Score -= 5 * 100;
         }
         m_LastValidHitType = hitType;
         m_Combo = 0;
