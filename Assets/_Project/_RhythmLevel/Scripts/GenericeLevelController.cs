@@ -27,14 +27,6 @@ public class GenericeLevelController : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    void OnApplicationFocus(bool focus)
-    {
-        if (!focus)
-        {
-            PauseGame();
-        }
-    }
-
     void OnApplicationPause(bool pause)
     {
         if (pause)

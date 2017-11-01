@@ -194,6 +194,7 @@ public class RhythmLevelController : MonoBehaviour
         ConstructNoteBasedOnRawJson();
         CurrentGameState = GameState.playing;
         MusicPlayer.time = 0;
+        m_LastValidHit_Timestamp = 0;
         foreach (Transform item in NoteContainer.transform)
         {
             Destroy(item.gameObject);
