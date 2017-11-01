@@ -1,27 +1,20 @@
 fileFormatVersion: 2
-guid: 80781c8df8a623941a08f20b915eec00
-timeCreated: 1508927453
+guid: 3db8f06a0e606774294593c61cecf14f
+timeCreated: 1509511347
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: UIComponent_0
-    21300002: UIComponent_1
-    21300004: UIComponent_2
-    21300006: UIComponent_3
-    21300008: UIComponent_4
-    21300010: UIComponent_5
-    21300012: UIComponent_6
-    21300014: UIComponent_7
-    21300016: UIComponent_8
-    21300018: UIComponent_9
-    21300020: UIComponent_10
-    21300022: UIComponent_11
-    21300024: UIComponent_12
-    21300026: UIComponent_13
-    21300028: UIComponent_14
-    21300030: UIComponent_15
-    21300032: UIComponent_16
-    21300034: UIComponent_17
+    21300000: GameResulUI_0
+    21300002: GameResulUI_1
+    21300004: GameResulUI_2
+    21300006: GameResulUI_3
+    21300008: GameResulUI_4
+    21300010: GameResulUI_5
+    21300012: GameResulUI_6
+    21300014: GameResulUI_7
+    21300016: GameResulUI_8
+    21300018: GameResulUI_9
+    21300020: GameResulUI_10
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -105,11 +98,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UIComponent_0
+      name: GameResulUI_0
       rect:
         serializedVersion: 2
         x: 28
-        y: 131
+        y: 118
         width: 46
         height: 50
       alignment: 0
@@ -119,11 +112,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_1
+      name: GameResulUI_1
       rect:
         serializedVersion: 2
         x: 110
-        y: 133
+        y: 121
         width: 38
         height: 42
       alignment: 0
@@ -133,13 +126,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_2
+      name: GameResulUI_2
       rect:
         serializedVersion: 2
-        x: 190
-        y: 133
-        width: 32
-        height: 40
+        x: 192
+        y: 122
+        width: 28
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,11 +140,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_3
+      name: GameResulUI_3
       rect:
         serializedVersion: 2
-        x: 263
-        y: 133
+        x: 264
+        y: 119
         width: 34
         height: 56
       alignment: 0
@@ -161,25 +154,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_4
+      name: GameResulUI_4
       rect:
         serializedVersion: 2
-        x: 345
-        y: 31
-        width: 270
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_5
-      rect:
-        serializedVersion: 2
-        x: 634
-        y: 31
+        x: 351
+        y: 16
         width: 192
         height: 189
       alignment: 0
@@ -189,11 +168,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_6
+      name: GameResulUI_5
       rect:
         serializedVersion: 2
         x: 28
-        y: 73
+        y: 60
         width: 46
         height: 50
       alignment: 0
@@ -203,11 +182,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_7
+      name: GameResulUI_6
       rect:
         serializedVersion: 2
         x: 110
-        y: 79
+        y: 66
         width: 38
         height: 42
       alignment: 0
@@ -217,11 +196,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_8
+      name: GameResulUI_7
       rect:
         serializedVersion: 2
         x: 190
-        y: 81
+        y: 68
         width: 32
         height: 40
       alignment: 0
@@ -231,11 +210,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_9
+      name: GameResulUI_8
       rect:
         serializedVersion: 2
         x: 264
-        y: 71
+        y: 58
         width: 34
         height: 56
       alignment: 0
@@ -245,95 +224,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_10
+      name: GameResulUI_9
       rect:
         serializedVersion: 2
-        x: 36
-        y: 33
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_11
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 33
-        width: 8
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_12
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 25
-        width: 49
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_13
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 11
-        width: 44
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_14
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 27
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_15
-      rect:
-        serializedVersion: 2
-        x: 190
-        y: 11
-        width: 44
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UIComponent_16
-      rect:
-        serializedVersion: 2
-        x: 274
-        y: 27
+        x: 278
+        y: 19
         width: 13
         height: 13
       alignment: 0
@@ -343,13 +238,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIComponent_17
+      name: GameResulUI_10
       rect:
         serializedVersion: 2
-        x: 18
-        y: 199
-        width: 304
-        height: 23
+        x: 19
+        y: 187
+        width: 302
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e2587c36ea008ae46a3f1e1649f46b5d
-timeCreated: 1508743607
+guid: 1b960faf5add4d54684b36cfae20e817
+timeCreated: 1509511546
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -93,10 +93,10 @@ TextureImporter:
       name: StaticItem_0
       rect:
         serializedVersion: 2
-        x: 39
-        y: 530
+        x: 56
+        y: 538
         width: 1288
-        height: 167
+        height: 164
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -107,7 +107,7 @@ TextureImporter:
       name: StaticItem_1
       rect:
         serializedVersion: 2
-        x: 17
+        x: 28
         y: 18
         width: 644
         height: 456
@@ -121,8 +121,8 @@ TextureImporter:
       name: StaticItem_2
       rect:
         serializedVersion: 2
-        x: 736
-        y: 303
+        x: 744
+        y: 302
         width: 120
         height: 160
       alignment: 0

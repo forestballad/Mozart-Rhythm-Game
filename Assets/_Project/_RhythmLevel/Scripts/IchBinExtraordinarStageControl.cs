@@ -62,6 +62,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public GameObject StarFillingSpawnLoc;
 
+    public List<Sprite> Endings;
+
     // Use this for initialization
     void Start () {
         m_IsActing = false;
@@ -94,6 +96,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         CreditWindow.SetActive(false);
         m_IsActing = false;
         GameObject.Find("GameResultScoreText").GetComponent<Text>().text = m_Score.ToString();
+        GameObject.Find("GameResultCG").GetComponent<Image>().sprite = Endings[m_CurrentStar];
         RecText.SetActive(false);
     }
 
@@ -177,47 +180,44 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public void NoteSuccess(string hitType, bool halfbaseScore)
     {
-        int baseScore = 0;
+        int baseScore = (10 + getComboMultiplier())*100;
+        m_LastValidHitType = hitType;
         m_Combo++;
         if (hitType == "GOOD")
         {
-            m_LastValidHitType = "GOOD";
-            baseScore = 10;
-
             ParticleSystem ps = Instantiate(hitParticleGood);
             ps.transform.position = GameObject.Find("NoteEndLoc").transform.position;
             ps.Play();
         }
         else if (hitType == "PERFECT")
         {
-            m_LastValidHitType = "PERFECT";
-
-            
-            baseScore = 20;
-            if (m_CurrentStar < 3)
-            {
-                FillStar();
-            }
+            baseScore *= 2;
 
             ParticleSystem ps = Instantiate(hitParticlePerfect);
             ps.transform.position = GameObject.Find("NoteEndLoc").transform.position;
             ps.Play();
 
-           
+            if (m_CurrentStar < 3)
+            {
+                FillStar();
+            }
         }
-        int finalScore = baseScore + m_Combo * getComboMultiplier();
         if (halfbaseScore)
         {
-            m_Score += finalScore / 2;
+            m_Score += baseScore / 2;
         }
         else
         {
-            m_Score += finalScore;
+            m_Score += baseScore;
         }
     }
 
     public void NoteFail(string hitType)
     {
+        if (hitType == "BAD")
+        {
+            m_Score += 5 * 100;
+        }
         m_LastValidHitType = hitType;
         m_Combo = 0;
     }
@@ -226,29 +226,33 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     {
         if (m_Combo >= 100)
         {
-            return 5;
+            return 10;
         }
         else if (m_Combo >= 50)
         {
-            return 3;
+            return 5;
         }
         else if (m_Combo >= 10)
         {
-            return 2;
+            return 3;
         }
         else
         {
-            return 1;
+            return 2;
         }
     }
 
     void InitStars()
     {
-        int starHit = m_TotalNoteNum / 3;
+        int starHit = Mathf.FloorToInt(m_TotalNoteNum * 0.9f / 3);
         m_CurrentStar = 0;
-        StarIcons[0].GetComponent<StarIconController>().Init(starHit);
-        StarIcons[1].GetComponent<StarIconController>().Init(starHit);
-        StarIcons[2].GetComponent<StarIconController>().Init(m_TotalNoteNum - starHit * 2);
+
+        for (int i = 0; i < 2; i++)
+        {
+            StarIcons[0].GetComponent<StarIconController>().Init(starHit);
+            StarIcons[1].GetComponent<StarIconController>().Init(starHit);
+            StarIcons[2].GetComponent<StarIconController>().Init(starHit);
+        }
 
         for (int i = 0; i < 3; i++)
         {

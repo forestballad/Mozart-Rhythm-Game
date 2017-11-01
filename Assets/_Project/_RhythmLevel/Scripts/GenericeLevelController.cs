@@ -45,8 +45,11 @@ public class GenericeLevelController : MonoBehaviour {
 
     public void PauseGame()
     {
-        h_SpecificLevelController.Pause();
-        PauseGameWindow.SetActive(true);
+        if (h_SpecificLevelController.CurrentGameState == RhythmLevelController.GameState.playing || h_SpecificLevelController.CurrentGameState == RhythmLevelController.GameState.pause)
+        {
+            h_SpecificLevelController.Pause();
+            PauseGameWindow.SetActive(true);
+        }
     }
 
     public void UnPauseGame()

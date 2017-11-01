@@ -1,17 +1,15 @@
 fileFormatVersion: 2
-guid: 4e3ac0a02006aac4ebc9dba6a5dc7a22
-timeCreated: 1508976080
+guid: 2e08530680e123a4c8801958acf3473d
+timeCreated: 1509511492
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Women2_0
-    21300002: Women2_1
-    21300004: Women2_2
-    21300006: Women2_3
-    21300008: Woman2_0
-    21300010: Woman2_1
-    21300012: Woman2_2
-    21300014: Woman2_3
+    21300000: TitleSceneUI_0
+    21300002: TitleSceneUI_2
+    21300004: TitleSceneUI_3
+    21300006: TitleSceneUI_4
+    21300008: TitleSceneUI_5
+    21300010: TitleSceneUI_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -95,13 +93,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woman2_0
+      name: TitleSceneUI_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 130
-        height: 210
+        x: 26
+        y: 192
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -109,13 +107,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Woman2_1
+      name: TitleSceneUI_2
       rect:
         serializedVersion: 2
-        x: 130
-        y: 0
-        width: 130
-        height: 210
+        x: 27
+        y: 184
+        width: 48
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,13 +121,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Woman2_2
+      name: TitleSceneUI_3
       rect:
         serializedVersion: 2
-        x: 260
-        y: 0
-        width: 130
-        height: 210
+        x: 89
+        y: 170
+        width: 44
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,13 +135,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Woman2_3
+      name: TitleSceneUI_4
       rect:
         serializedVersion: 2
-        x: 390
-        y: 0
-        width: 130
-        height: 210
+        x: 150
+        y: 186
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TitleSceneUI_5
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 170
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TitleSceneUI_6
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 33
+        width: 892
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

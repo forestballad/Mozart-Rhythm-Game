@@ -27,8 +27,6 @@ public class NoteController : MonoBehaviour {
 
     public GameObject GameLogic;
 
-    Camera MainCamera;
-
     Vector3 m_SpawnLoc;
     Vector3 m_VanishLoc;
 
