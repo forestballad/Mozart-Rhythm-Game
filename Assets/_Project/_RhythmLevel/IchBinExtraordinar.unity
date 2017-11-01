@@ -139,7 +139,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1526360831}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &16073688
 SpriteRenderer:
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 742606896}
+      - m_Target: {fileID: 742606899}
         m_MethodName: PlayRecord
         m_Mode: 1
         m_Arguments:
@@ -1291,6 +1291,7 @@ MonoBehaviour:
   ReturnFromPauseState: 0
   NoteContainer: {fileID: 587724555}
   NotePrefab: {fileID: 1036105621141924, guid: f1c9a82f094eb484baad1861ee41c5c9, type: 2}
+  m_TimeStamp: 0
 --- !u!82 &742606897
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1594,7 +1595,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 784730764}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8473021, y: -2.3252628, z: -0.023264926}
+  m_LocalPosition: {x: -0.8473021, y: -2.3252628, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 567612496}
@@ -3103,8 +3104,8 @@ Transform:
   m_LocalPosition: {x: -0.8473021, y: -2.3252628, z: -0.023264926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 16073687}
   - {fileID: 1879961008}
+  - {fileID: 16073687}
   m_Father: {fileID: 567612496}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3180,10 +3181,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cd2d2835e7c924d877b3e961d433ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftLoc: {fileID: 784730765}
-  RightLoc: {fileID: 1618451719}
+  MainCamera: {fileID: 1230495230}
+  h_LevelController: {fileID: 742606896}
+  WayPoints:
+  - {fileID: 784730765}
+  - {fileID: 1618451719}
   LeftHorn: {fileID: 16073686}
   RightHorn: {fileID: 1879961007}
+  m_speed: 0.5
+  m_WP0: 0
+  m_WP1: 0
+  m_TS0: 0
+  m_TS1: 0
 --- !u!1 &1547963661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4118,11 +4127,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879961007}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.99, y: 2.45, z: 0}
+  m_LocalPosition: {x: -2.9900002, y: 2.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1526360831}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1879961009
 SpriteRenderer:

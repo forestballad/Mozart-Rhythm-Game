@@ -64,6 +64,7 @@ public class GenericeLevelController : MonoBehaviour {
 
     public void ReplayGame()
     {
+        ResultDisplayWindow.SetActive(false);
         PauseGameWindow.SetActive(false);
         h_SpecificLevelController.PlayLevel();
     }
@@ -71,5 +72,11 @@ public class GenericeLevelController : MonoBehaviour {
     public void EndGame()
     {
         ResultDisplayWindow.SetActive(true);
+    }
+
+    public void PlayRecord()
+    {
+        ResultDisplayWindow.SetActive(false);
+        h_SpecificLevelController.PlayRecord();
     }
 }

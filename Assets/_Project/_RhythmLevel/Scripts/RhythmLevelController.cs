@@ -55,7 +55,7 @@ public class RhythmLevelController : MonoBehaviour
     public GameObject NoteContainer;
     public GameObject NotePrefab;
 
-    float m_TimeStamp;
+    public float m_TimeStamp;
     float m_LastValidHit_Timestamp;
 
     float m_HitThreshold = 0.12f;
@@ -183,8 +183,8 @@ public class RhythmLevelController : MonoBehaviour
                 {
                     Destroy(item.gameObject);
                 }
-                GetComponent<IchBinExtraordinarStageControl>().EndActing();
                 GetComponent<GenericeLevelController>().EndGame();
+                GetComponent<IchBinExtraordinarStageControl>().EndActing();
             }
         }
     }

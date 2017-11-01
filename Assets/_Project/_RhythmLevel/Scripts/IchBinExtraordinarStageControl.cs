@@ -73,6 +73,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     public void BeginActing(bool PlayingRecord)
     {
+        CaciliaHorn.GetComponent<CaciliaController>().StartActing();
         StageLight.SetActive(false);
         m_IsActing = true;
         m_Score = 0;
