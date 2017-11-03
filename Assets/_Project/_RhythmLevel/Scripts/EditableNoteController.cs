@@ -50,4 +50,14 @@ public class EditableNoteController : MonoBehaviour {
     {
         GameObject.Find("NoteEditor").GetComponent<NoteEditor>().OpenNoteEditWindow(m_index);
     }
+
+    public void GetHit()
+    {
+        GetComponent<SpriteRenderer>().sprite = m_NoteSpriteHit;
+    }
+
+    public void ResetHit()
+    {
+        GetComponent<SpriteRenderer>().sprite = m_NoteSprite;
+    }
 }

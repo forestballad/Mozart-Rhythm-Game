@@ -74,6 +74,23 @@ public class NoteEditor : MonoBehaviour {
         if (EditorState == State.Editing)
         {
             SycnNoteLocation();
+            if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L)))
+            {
+                int minIndex = -1;
+                float minRange = Mathf.Infinity;
+                for (int i = 0; i < ConstructedNote.Count; i++)
+                {
+                    if (Mathf.Abs(ConstructedNote[i].m_Timestamp - MusicPlayer.time) < minRange)
+                    {
+                        minRange = Mathf.Abs(ConstructedNote[i].m_Timestamp - MusicPlayer.time);
+                        minIndex = i;
+                    }
+                }
+                if (minRange <= 0.05)
+                {
+                    ConstructedNote[minIndex].m_GameObject.GetComponent<EditableNoteController>().GetHit();
+                }
+            }
         }
 
         if (EditorState == State.Recording)
@@ -348,5 +365,13 @@ public class NoteEditor : MonoBehaviour {
         GameObject.Find("StopRecordButton").GetComponent<Button>().interactable = false;
         GameObject.Find("RecordButton").GetComponent<Button>().interactable = true;
 
+    }
+
+    public void ResetAllHit()
+    {
+        foreach (EditableNote item in ConstructedNote)
+        {
+            item.m_GameObject.GetComponent<EditableNoteController>().ResetHit();
+        }
     }
 }
