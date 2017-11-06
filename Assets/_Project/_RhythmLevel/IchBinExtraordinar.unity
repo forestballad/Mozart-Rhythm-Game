@@ -1212,6 +1212,7 @@ MonoBehaviour:
   StageController: {fileID: 742606898}
   MusicPlayer: {fileID: 742606897}
   TheSong: {fileID: 8300000, guid: 06bbe43cb3ee603488c27ffe2cab2f49, type: 3}
+  NoteRecord: {fileID: 4900000, guid: ba170f724794df8448f2eaf5e6cf51f2, type: 3}
   CurrentGameState: 0
   ReturnFromPauseState: 0
   NoteContainer: {fileID: 587724555}
@@ -1930,7 +1931,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 1.04 Beta
+  m_Text: Version 1.05 Beta
 --- !u!222 &1012941927
 CanvasRenderer:
   m_ObjectHideFlags: 0
