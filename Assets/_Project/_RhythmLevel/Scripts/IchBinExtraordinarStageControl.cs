@@ -54,8 +54,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject ResultDisplayWindow;
     public GameObject CreditWindow;
 
-    public GameObject PauseWindow;
-
     public ParticleSystem hitParticleGood;
     public ParticleSystem hitParticlePerfect;
     public ParticleSystem starFillingEffect;
@@ -63,6 +61,10 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     public GameObject StarFillingSpawnLoc;
 
     public List<Sprite> Endings;
+
+    public GameObject DebugHitTypeText;
+    int DebugTotalHit;
+    int DebugPerfectHit;
 
     // Use this for initialization
     void Start () {
@@ -89,6 +91,9 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             RecText.SetActive(true);
         }
+
+        DebugTotalHit = 0;
+        DebugPerfectHit = 0;
     }
 
     public void EndActing()
@@ -181,6 +186,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             NoteResultText.SetActive(true);
         }
+
+        DebugHitTypeText.GetComponent<Text>().text = "Perfect/Total: "+DebugPerfectHit + "/" + DebugTotalHit;
     }
 
     public void NoteSuccess(string hitType, bool halfbaseScore)
@@ -206,6 +213,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             {
                 FillStar();
             }
+            DebugPerfectHit++;
         }
         if (halfbaseScore)
         {
@@ -215,6 +223,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         {
             m_Score += baseScore;
         }
+        DebugTotalHit++;
     }
 
     public void NoteFail(string hitType)
@@ -229,6 +238,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         }
         m_LastValidHitType = hitType;
         m_Combo = 0;
+        DebugTotalHit++;
     }
 
     int getComboMultiplier()
