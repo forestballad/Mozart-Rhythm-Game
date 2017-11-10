@@ -80,7 +80,7 @@ public class RhythmLevelController : MonoBehaviour
         if (CurrentGameState == GameState.playing || CurrentGameState == GameState.record)
         {
             m_TimeStamp = MusicPlayer.time;
-            GameObject.Find("FPSText").GetComponent<UnityEngine.UI.Text>().text = "FPS: " + 1 / Time.deltaTime;
+            //GameObject.Find("FPSText").GetComponent<UnityEngine.UI.Text>().text = "FPS: " + 1 / Time.deltaTime;
 
             #region SpawnNote
             for (int i = 0; i < ConstructedNote.Count; i++)
@@ -253,7 +253,7 @@ public class RhythmLevelController : MonoBehaviour
             Note newNote = new Note(savedNotes.TimestampList[i], savedNotes.NoteTypeList[i]);
             if (savedNotes.TimestampList[i] > 90)
             {
-                newNote.m_Lifespan = 1.5f;
+                newNote.m_Lifespan = 1.8f;
             }
             ConstructedNote.Add(newNote);
         }

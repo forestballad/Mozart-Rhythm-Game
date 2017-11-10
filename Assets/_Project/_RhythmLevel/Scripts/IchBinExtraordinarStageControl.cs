@@ -263,7 +263,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     void InitStars()
     {
-        int starHit = Mathf.FloorToInt(m_TotalNoteNum * 0.9f / 3);
+        int starHit = Mathf.FloorToInt(m_TotalNoteNum * 0.8f / 3);
         m_CurrentStar = 0;
 
         for (int i = 0; i < 2; i++)
@@ -278,7 +278,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
             StarIcons[i].GetComponent<SpriteRenderer>().color = Color.white;
             StarIcons[i].GetComponent<Animator>().SetBool("IsActive", false);
         }
-        
     }
 
     void FillStar()
