@@ -49,7 +49,7 @@ public class TitleScene : MonoBehaviour {
         m_TutorialStage++;
         GameObject.Find("GrayscaleCar").GetComponent<Animator>().SetInteger("Stage", m_TutorialStage);
         yield return new WaitForSeconds(2);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("IchBinExtraordinar");
     }
 
 
