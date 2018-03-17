@@ -24,7 +24,7 @@ public class GenericeLevelController : MonoBehaviour {
 
     public void ReturnToTitleScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("IBETitleScene");
     }
 
     void OnApplicationPause(bool pause)
