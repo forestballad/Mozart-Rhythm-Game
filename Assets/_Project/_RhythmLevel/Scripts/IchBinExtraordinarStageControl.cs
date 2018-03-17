@@ -125,7 +125,7 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
 
     void SyncDataWithGameLogic()
     {
-        m_TimeStamp = h_SpecificLevelController.MusicPlayer.time;
+        m_TimeStamp = h_SpecificLevelController.GetMusicTime();
         m_NRT_Vanish_Timestamp = h_SpecificLevelController.GetLastValidHitTimestamp() + NRT_DisplayTime;
     }
 

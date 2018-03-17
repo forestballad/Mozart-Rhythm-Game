@@ -7,7 +7,8 @@ public class RhythmLevelController : MonoBehaviour
 {
     public IchBinExtraordinarStageControl StageController;
 
-    public AudioSource MusicPlayer;
+    [SerializeField]
+    private AudioSource _musicPlayer;
     public AudioClip TheSong;
 
     public TextAsset NoteRecord;
@@ -79,7 +80,8 @@ public class RhythmLevelController : MonoBehaviour
     {
         if (CurrentGameState == GameState.playing || CurrentGameState == GameState.record)
         {
-            m_TimeStamp = MusicPlayer.time;
+            m_TimeStamp = GetMusicTime();
+
             //GameObject.Find("FPSText").GetComponent<UnityEngine.UI.Text>().text = "FPS: " + 1 / Time.deltaTime;
 
             #region SpawnNote
@@ -180,7 +182,7 @@ public class RhythmLevelController : MonoBehaviour
 
             if (m_TimeStamp >= TheSong.length)
             {
-                MusicPlayer.Stop();
+                _musicPlayer.Stop();
                 CurrentGameState = GameState.result;
                 foreach (Transform item in NoteContainer.transform)
                 {
@@ -204,14 +206,15 @@ public class RhythmLevelController : MonoBehaviour
     {
         ConstructNoteBasedOnRawJson();
         CurrentGameState = GameState.playing;
-        MusicPlayer.time = 0;
+        _musicPlayer.time = 0;
+        _musicPlayer.timeSamples = 0;
         m_LastValidHit_Timestamp = 0;
         foreach (Transform item in NoteContainer.transform)
         {
             Destroy(item.gameObject);
         }
         PlayerInputRecord = new RawNoteRecord();
-        MusicPlayer.Play();
+        _musicPlayer.Play();
         m_TimeStamp = 0;
         StageController.BeginActing(false);
     }
@@ -220,12 +223,13 @@ public class RhythmLevelController : MonoBehaviour
     {
         ConstructNoteBasedOnRawJson();
         CurrentGameState = GameState.record;
-        MusicPlayer.time = 0;
+        _musicPlayer.time = 0;
+        _musicPlayer.timeSamples = 0;
         foreach (Transform item in NoteContainer.transform)
         {
             Destroy(item.gameObject);
         }
-        MusicPlayer.Play();
+        _musicPlayer.Play();
         InputRecordCounter = 0;
         StageController.BeginActing(true);
     }
@@ -278,12 +282,22 @@ public class RhythmLevelController : MonoBehaviour
     {
         ReturnFromPauseState = CurrentGameState;
         CurrentGameState = GameState.pause;
-        MusicPlayer.Pause();
+        _musicPlayer.Pause();
     }
 
     public void UnPause()
     {
         CurrentGameState = ReturnFromPauseState;
-        MusicPlayer.Play();
+        _musicPlayer.Play();
+    }
+
+    /// <summary>
+    /// Current music played time
+    /// </summary>
+    /// <returns></returns>
+    public float GetMusicTime()
+    {
+        // Do not use AudioSource.time, it is not accurate, please use timeSamples instead
+        return (float)_musicPlayer.timeSamples / _musicPlayer.clip.frequency;
     }
 }
