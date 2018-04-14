@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GenericeLevelController : MonoBehaviour {
     public RhythmLevelController h_SpecificLevelController;
-    public IchBinExtraordinarStageControl h_StageActor;
 
     public GameObject ResultDisplayWindow;
     public GameObject PauseGameWindow;

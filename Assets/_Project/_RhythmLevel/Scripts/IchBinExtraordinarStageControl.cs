@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,9 +74,35 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         StageAnimationInstruction.counter = 0;
         StageAnimationInstruction.Instruction = new List<string>() { "AnimMusicBegin", "AnimDrumIn", "AnimVocalIn" ,"AnimMusicPause", "AnimMusicBack","AnimMusicEnd" };
         StageAnimationInstruction.TimeStamp = new List<float>() {0,4.6f,10.4f,87.5f,98,119 };
+
+        h_SpecificLevelController.OnEntryPlaying += OnEntryPlaying;
+        h_SpecificLevelController.OnEntryRecord += OnEntryRecord;
+        h_SpecificLevelController.OnEntryResult += OnEntryResult;
+        h_SpecificLevelController.OnUpdateView += OnUpdateView;
+	    h_SpecificLevelController.OnNoteResult += NoteResult;
     }
 
-    public void BeginActing(bool PlayingRecord)
+    private void OnEntryPlaying(object sender, EventArgs e)
+    {
+        BeginActing(false);
+    }
+
+    private void OnEntryRecord(object sender, EventArgs e)
+    {
+        BeginActing(true);
+    }
+
+    private void OnEntryResult(object sender, EventArgs e)
+    {
+        EndActing();
+    }
+
+    private void OnUpdateView(object sender, EventArgs e)
+    {
+        ManualUpdate();
+    }
+
+    private void BeginActing(bool PlayingRecord)
     {
         CaciliaHorn.GetComponent<CaciliaController>().StartActing();
         StageLight.SetActive(false);
@@ -190,9 +217,29 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         DebugHitTypeText.GetComponent<Text>().text = "Perfect/Total: "+DebugPerfectHit + "/" + DebugTotalHit;
     }
 
-    public void NoteSuccess(string hitType, bool halfbaseScore)
+    #region NoteResult
+
+    private void NoteResult(System.Object sender, RhythmLevelController.NoteResultEventArgs e)
     {
-        int baseScore = (10 + getComboMultiplier())*100;
+        switch (e.resultType)
+        {
+	        case "PERFECT":
+	        case "GOOD":
+		        NoteSuccess(sender, e);
+		        break;
+	        case "BAD":
+	        case "MISS":
+	        case "WRONG":
+		        NoteFail(sender, e);
+		        break;
+		}
+    }
+
+    private void NoteSuccess(System.Object sender, RhythmLevelController.NoteResultEventArgs e)
+    {
+        string hitType = e.resultType;
+        bool halfbaseScore = e.halfBaseScore;
+        int baseScore = (10 + GetComboMultiplier()) * 100;
         m_LastValidHitType = hitType;
         m_Combo++;
         if (hitType == "GOOD")
@@ -226,8 +273,9 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         DebugTotalHit++;
     }
 
-    public void NoteFail(string hitType)
+    private void NoteFail(System.Object sender, RhythmLevelController.NoteResultEventArgs e)
     {
+        string hitType = e.resultType;
         if (hitType == "BAD")
         {
             m_Score += 5 * 100;
@@ -239,9 +287,11 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         m_LastValidHitType = hitType;
         m_Combo = 0;
         DebugTotalHit++;
-    }
+    } 
 
-    int getComboMultiplier()
+    #endregion
+
+    int GetComboMultiplier()
     {
         if (m_Combo >= 100)
         {
@@ -300,6 +350,8 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
     {
         CreditWindow.SetActive(false);
     }
+
+    #region Anim
 
     void AnimMusicBegin()
     {
@@ -369,4 +421,6 @@ public class IchBinExtraordinarStageControl : MonoBehaviour {
         MozartGuitar.GetComponent<Animator>().SetBool("IsActive", false);
         CaciliaHorn.GetComponent<Animator>().SetBool("IsActive", false);
     }
+
+    #endregion
 }

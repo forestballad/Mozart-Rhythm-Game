@@ -1,12 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class RhythmLevelController : MonoBehaviour
 {
-    public IchBinExtraordinarStageControl StageController;
-
     [SerializeField]
     private AudioSource _musicPlayer;
     public AudioClip TheSong;
@@ -43,13 +42,20 @@ public class RhythmLevelController : MonoBehaviour
 
     public class RawNoteRecord
     {
+        public float Bpm;
         public List<float> TimestampList;
         public List<string> NoteTypeList;
+        public List<string> NoteTrackList;
+        public List<float> NoteXPosList;
+        public List<float> NoteYPosList;
 
         public RawNoteRecord()
         {
             TimestampList = new List<float>();
             NoteTypeList = new List<string>();
+            NoteTrackList = new List<string>();
+            NoteXPosList = new List<float>();
+            NoteYPosList = new List<float>();
         }
     }
     RawNoteRecord PlayerInputRecord;
@@ -63,6 +69,38 @@ public class RhythmLevelController : MonoBehaviour
 
     float m_HitThreshold = 0.12f;
     float m_HitCoolDown = 0.05f;
+
+    #region Event
+    
+    public event EventHandler OnEntryIdle;
+    public event EventHandler OnEntryPlaying;
+    public event EventHandler OnEntryResult;
+    public event EventHandler OnEntryRecord;
+    public event EventHandler OnEntryPause;
+    public event EventHandler OnUpdateView;
+
+    public event EventHandler<NoteResultEventArgs> OnNoteResult;
+
+    private void DoOnEntryIdle()    { if (OnEntryIdle != null)    OnEntryIdle(this, EventArgs.Empty); }
+    private void DoOnEntryPlaying() { if (OnEntryPlaying != null) OnEntryPlaying(this, EventArgs.Empty); }
+    private void DoOnEntryResult()  { if (OnEntryResult != null)  OnEntryResult(this, EventArgs.Empty); }
+    private void DoOnEntryRecord()  { if (OnEntryRecord != null)  OnEntryRecord(this, EventArgs.Empty); }
+    private void DoOnEntryPause()   { if (OnEntryPause != null)   OnEntryPause(this, EventArgs.Empty); }
+    private void DoOnUpdateView()   { if (OnUpdateView != null)   OnUpdateView(this, EventArgs.Empty); }
+
+    private void DoOnNoteResult(NoteResultEventArgs e)  { if (OnNoteResult != null) OnNoteResult(this, e); }
+
+    #region EventArgs
+
+    public class NoteResultEventArgs : EventArgs
+    {
+        public string resultType;
+        public bool halfBaseScore;
+    }
+
+    #endregion
+
+    #endregion
 
     void Awake()
     {
@@ -161,7 +199,8 @@ public class RhythmLevelController : MonoBehaviour
                     }
 
                     ConstructedNote[ClosetValidNoteNum].m_BeenHit = true;
-                    ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<NoteController>().GetHit(ThisFrameHitType, Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - m_TimeStamp));
+                    var args = ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<NoteController>().GetHit(ThisFrameHitType, Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - m_TimeStamp));
+	                DoOnNoteResult(args);
                 }
             }
 
@@ -174,9 +213,10 @@ public class RhythmLevelController : MonoBehaviour
                 if (ConstructedNote[i].m_BeenSpawn && !ConstructedNote[i].m_BeenHit && (m_TimeStamp > (ConstructedNote[i].m_Timestamp + m_HitThreshold)))
                 {
                     ConstructedNote[i].m_BeenHit = true;
-                    ConstructedNote[i].NoteGameObject.GetComponent<NoteController>().GetHit("3", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
-                }
-            }
+                    var args = ConstructedNote[i].NoteGameObject.GetComponent<NoteController>().GetHit("3", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
+	                DoOnNoteResult(args);
+				}
+			}
 
             #endregion
 
@@ -189,10 +229,11 @@ public class RhythmLevelController : MonoBehaviour
                     Destroy(item.gameObject);
                 }
                 GetComponent<GenericeLevelController>().EndGame();
-                GetComponent<IchBinExtraordinarStageControl>().EndActing();
+                DoOnEntryResult();
             }
         }
-        GetComponent<IchBinExtraordinarStageControl>().ManualUpdate();
+
+        DoOnUpdateView();
 
         Component[] NoteControllers;
         NoteControllers = NoteContainer.GetComponentsInChildren<NoteController>();
@@ -216,7 +257,8 @@ public class RhythmLevelController : MonoBehaviour
         PlayerInputRecord = new RawNoteRecord();
         _musicPlayer.Play();
         m_TimeStamp = 0;
-        StageController.BeginActing(false);
+
+        DoOnEntryPlaying();
     }
 
     public void PlayRecord()
@@ -231,7 +273,8 @@ public class RhythmLevelController : MonoBehaviour
         }
         _musicPlayer.Play();
         InputRecordCounter = 0;
-        StageController.BeginActing(true);
+
+        DoOnEntryRecord();
     }
 
     void ConstructNoteBasedOnRawJson()

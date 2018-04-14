@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,11 +40,18 @@ public class NoteController : MonoBehaviour {
 
         m_SpawnLoc = spawnPoint.transform.position;
         m_VanishLoc = vanishPoint.transform.position;
+
+        GameLogic.GetComponent<RhythmLevelController>().OnUpdateView += OnUpdateView;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         
+    }
+
+    private void OnUpdateView(object sender, EventArgs e)
+    {
+//        ManualUpdate();
     }
 
     public void ManualUpdate()
@@ -86,17 +94,15 @@ public class NoteController : MonoBehaviour {
         return NoteLoc;
     }
 
-    public void GetHit(string hitType, float timeDiff)
+    public RhythmLevelController.NoteResultEventArgs GetHit(string hitType, float timeDiff)
     {
         if (hitType == "3")
         {
-            MissNote();
-            return;
+            return MissNote();
         }
         if ((hitType == "1" && m_notetype == "0") || (hitType == "0" && m_notetype == "1"))
         {
-            WrongNotePlayed();
-            return;
+            return WrongNotePlayed();
         }
         bool halfScore = false;
         if ((hitType == "1" || hitType == "0" )&& m_notetype == "2")
@@ -105,44 +111,68 @@ public class NoteController : MonoBehaviour {
         }
         if (timeDiff > HitGoodThreshold)
         {
-            BadNotePlayed();
+            return BadNotePlayed();
         }
         else if (timeDiff <= HitPerfectThreshold)
         {
-            PerfectNotePlayed(halfScore);
+            return PerfectNotePlayed(halfScore);
         }
         else
         {
-            GoodNotePlayed(halfScore);
+            return GoodNotePlayed(halfScore);
         }
     }
 
-    public void PerfectNotePlayed(bool halfbaseScore)
+    public RhythmLevelController.NoteResultEventArgs PerfectNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("PERFECT", halfbaseScore);
+        var args = new RhythmLevelController.NoteResultEventArgs
+        {
+            halfBaseScore = halfbaseScore,
+            resultType = "PERFECT"
+        };
+        return args;
     }
 
-    public void GoodNotePlayed(bool halfbaseScore)
+    public RhythmLevelController.NoteResultEventArgs GoodNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteSuccess("GOOD", halfbaseScore);
+        var args = new RhythmLevelController.NoteResultEventArgs
+        {
+            halfBaseScore = halfbaseScore,
+            resultType = "GOOD"
+        };
+        return args;
     }
 
-    public void BadNotePlayed()
+    public RhythmLevelController.NoteResultEventArgs BadNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("BAD");
+
+        var args = new RhythmLevelController.NoteResultEventArgs
+        {
+            resultType = "BAD"
+        };
+        return args;
     }
 
-    public void MissNote()
+    public RhythmLevelController.NoteResultEventArgs MissNote()
     {
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("MISS");
+        var args = new RhythmLevelController.NoteResultEventArgs
+        {
+            resultType = "MISS"
+        };
+        return args;
     }
 
-    public void WrongNotePlayed()
+    public RhythmLevelController.NoteResultEventArgs WrongNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
-        GameLogic.GetComponent<IchBinExtraordinarStageControl>().NoteFail("WRONG");
+
+        var args = new RhythmLevelController.NoteResultEventArgs
+        {
+            resultType = "WRONG"
+        };
+        return args;
     }
 }
