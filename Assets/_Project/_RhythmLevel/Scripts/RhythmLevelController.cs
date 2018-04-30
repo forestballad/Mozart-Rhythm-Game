@@ -11,8 +11,10 @@ public class RhythmLevelController : MonoBehaviour
     public AudioClip TheSong;
 
     public TextAsset NoteRecord;
+	[SerializeField]
+	private InputHandler _inputHandler;
 
-    public enum GameState
+	public enum GameState
     {
         idle, playing, result, record, pause
     }
@@ -68,7 +70,6 @@ public class RhythmLevelController : MonoBehaviour
     float m_LastValidHit_Timestamp;
 
     float m_HitThreshold = 0.12f;
-    float m_HitCoolDown = 0.05f;
 
     #region Event
     
@@ -120,8 +121,6 @@ public class RhythmLevelController : MonoBehaviour
         {
             m_TimeStamp = GetMusicTime();
 
-            //GameObject.Find("FPSText").GetComponent<UnityEngine.UI.Text>().text = "FPS: " + 1 / Time.deltaTime;
-
             #region SpawnNote
             for (int i = 0; i < ConstructedNote.Count; i++)
             {
@@ -139,24 +138,18 @@ public class RhythmLevelController : MonoBehaviour
             float ThisFramHitTimestamp = 0;
 
             #region CatchHitting
-            if (CurrentGameState == GameState.playing && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L)) && m_TimeStamp >= m_LastValidHit_Timestamp + m_HitCoolDown)
-            {
-                ThisFramHitTimestamp = m_TimeStamp;
-                if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.L))
-                {
-                    ThisFrameHitType = "2";
-                }
-                else if (Input.GetKeyDown(KeyCode.A))
-                {
-                    ThisFrameHitType = "0";
-                }
-                else if (Input.GetKeyDown(KeyCode.L))
-                {
-                    ThisFrameHitType = "1";
-                }
 
-                PlayerInputRecord.TimestampList.Add(m_TimeStamp);
-                PlayerInputRecord.NoteTypeList.Add(ThisFrameHitType);
+			if (CurrentGameState == GameState.playing)
+            {
+				Debug.Assert(_inputHandler != null, "Game must have an inputHander");
+				ThisFrameHitType = _inputHandler.GetInput();
+
+	            if (ThisFrameHitType != "-1")
+	            {
+					ThisFramHitTimestamp = m_TimeStamp;
+					PlayerInputRecord.TimestampList.Add(m_TimeStamp);
+					PlayerInputRecord.NoteTypeList.Add(ThisFrameHitType);
+	            }
             }
             #endregion
 
