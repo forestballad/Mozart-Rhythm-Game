@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NoteController : MonoBehaviour {
@@ -51,17 +49,9 @@ public class NoteController : MonoBehaviour {
 
     private void OnUpdateView(object sender, EventArgs e)
     {
-//        ManualUpdate();
-    }
-
-    public void ManualUpdate()
-    {
-        if (GameLogic != null)
-        {
-            m_currentTimestamp = GameLogic.GetComponent<RhythmLevelController>().GetCurrentTimestamp();
-            transform.position = GetLocByTimetamp();
-        }
-    }
+		m_currentTimestamp = (sender as RhythmLevelController).GetMusicTime();
+		transform.position = GetLocByTimetamp();
+	}
 
     public void Init(float timestamp, string inputNoteType, float lifespan)
     {
@@ -96,7 +86,7 @@ public class NoteController : MonoBehaviour {
 
     public RhythmLevelController.NoteResultEventArgs GetHit(string hitType, float timeDiff)
     {
-        if (hitType == "3")
+        if (hitType == "miss")
         {
             return MissNote();
         }

@@ -204,16 +204,16 @@ public class RhythmLevelController : MonoBehaviour
                 }
             }
 
-
             #endregion
 
             #region MissNoteBreakCombo
+
             for (int i = 0; i < ConstructedNote.Count; i++)
             {
                 if (ConstructedNote[i].m_BeenSpawn && !ConstructedNote[i].m_BeenHit && (m_TimeStamp > (ConstructedNote[i].m_Timestamp + m_HitThreshold)))
                 {
                     ConstructedNote[i].m_BeenHit = true;
-                    var args = ConstructedNote[i].NoteGameObject.GetComponent<NoteController>().GetHit("3", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
+                    var args = ConstructedNote[i].NoteGameObject.GetComponent<NoteController>(). GetHit("miss", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
 	                DoOnNoteResult(args);
 				}
 			}
@@ -234,13 +234,6 @@ public class RhythmLevelController : MonoBehaviour
         }
 
         DoOnUpdateView();
-
-        Component[] NoteControllers;
-        NoteControllers = NoteContainer.GetComponentsInChildren<NoteController>();
-        foreach (NoteController item in NoteControllers)
-        {
-            item.ManualUpdate();
-        }
     }
 
     public void PlayLevel()
