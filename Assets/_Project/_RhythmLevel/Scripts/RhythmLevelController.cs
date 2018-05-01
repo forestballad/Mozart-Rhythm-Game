@@ -9,10 +9,11 @@ public class RhythmLevelController : MonoBehaviour
     [SerializeField]
     private AudioSource _musicPlayer;
     public AudioClip TheSong;
-
     public TextAsset NoteRecord;
 	[SerializeField]
 	private InputHandler _inputHandler;
+	[SerializeField]
+	private GameGonfig _gameGonfig;
 
 	public enum GameState
     {
@@ -30,11 +31,11 @@ public class RhythmLevelController : MonoBehaviour
         public bool m_BeenSpawn;
         public GameObject NoteGameObject;
 
-        public Note(float TimeStamp, string NoteType)
+        public Note(float TimeStamp, string NoteType, float lifespan)
         {
             m_Timestamp = TimeStamp;
             m_NoteType = NoteType;
-            m_Lifespan = 2f;
+            m_Lifespan = lifespan;
             m_BeenHit = false;
             m_BeenSpawn = false;
             NoteGameObject = null;
@@ -283,12 +284,8 @@ public class RhythmLevelController : MonoBehaviour
 
         for (int i = 0; i < noteNum; i++)
         {
-            Note newNote = new Note(savedNotes.TimestampList[i], savedNotes.NoteTypeList[i]);
-            if (savedNotes.TimestampList[i] > 90)
-            {
-                newNote.m_Lifespan = 1.8f;
-            }
-            ConstructedNote.Add(newNote);
+            Note newNote = new Note(savedNotes.TimestampList[i], savedNotes.NoteTypeList[i], _gameGonfig.NoteLifespan);
+			ConstructedNote.Add(newNote);
         }
     }
 

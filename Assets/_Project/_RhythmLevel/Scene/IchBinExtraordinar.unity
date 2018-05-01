@@ -1252,6 +1252,7 @@ GameObject:
   - component: {fileID: 742606899}
   - component: {fileID: 742606896}
   - component: {fileID: 742606898}
+  - component: {fileID: 742606900}
   - component: {fileID: 742606897}
   m_Layer: 0
   m_Name: GameLogic
@@ -1284,10 +1285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3f359d22e199d489f4081ba0a68572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageController: {fileID: 742606898}
-  MusicPlayer: {fileID: 742606897}
+  _musicPlayer: {fileID: 742606897}
   TheSong: {fileID: 8300000, guid: 0391aa77d09958f41b025f363c3eafa8, type: 3}
   NoteRecord: {fileID: 4900000, guid: ba170f724794df8448f2eaf5e6cf51f2, type: 3}
+  _inputHandler: {fileID: 742606900}
+  _gameGonfig: {fileID: 11400000, guid: 230b6ed8e8c1b3b48b7ea739772be957, type: 2}
   CurrentGameState: 0
   ReturnFromPauseState: 0
   NoteContainer: {fileID: 587724555}
@@ -1360,7 +1362,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1434,9 +1436,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   h_SpecificLevelController: {fileID: 742606896}
-  h_StageActor: {fileID: 742606898}
   ResultDisplayWindow: {fileID: 540748105}
   PauseGameWindow: {fileID: 762030960}
+--- !u!114 &742606900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 742606894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602441222a6cf4b40ba1deb672893178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &762030960
 GameObject:
   m_ObjectHideFlags: 0
