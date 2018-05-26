@@ -24,6 +24,6 @@ public class GameGonfig : ScriptableObject
 
 	public float NoteLifespan
 	{
-		get { return Mathf.Lerp(_noteLifespanMin, _noteLifespanMax, _noteSpeed / _noteSpeedMax); }
+		get { return Mathf.Lerp(_noteLifespanMax, _noteLifespanMin, _noteSpeed / _noteSpeedMax); }
 	}
 }

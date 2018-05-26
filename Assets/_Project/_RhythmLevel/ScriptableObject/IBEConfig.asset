@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd50afac50f3d294c9a4d2d852024347, type: 3}
   m_Name: IBEConfig
   m_EditorClassIdentifier: 
-  noteLifespanMin: 0.1
-  noteLifespanMax: 5
-  noteSpeedMin: 1
-  noteSpeedMax: 10
-  noteSpeed: 5
+  _noteLifespanMin: 0.1
+  _noteLifespanMax: 5
+  _noteSpeedMin: 1
+  _noteSpeedMax: 10
+  _noteSpeed: 7
