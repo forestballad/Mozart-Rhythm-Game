@@ -18,7 +18,8 @@ public class NoteController : MonoBehaviour {
 
     float m_currentTimestamp;
 
-    float HitGoodThreshold = 0.1f;
+	public float hitThreshold = 0.12f;
+	float HitGoodThreshold = 0.1f;
     float HitPerfectThreshold = 0.05f;
 
     public GameObject vanishPoint;
