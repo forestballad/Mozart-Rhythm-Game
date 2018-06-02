@@ -126,7 +126,7 @@ public class RhythmLevelController : MonoBehaviour
                 if (!ConstructedNote[i].m_BeenSpawn && (ConstructedNote[i].m_Timestamp - ConstructedNote[i].m_Lifespan) <= m_TimeStamp)
                 {
                     GameObject newNote = Instantiate(NotePrefab, NoteContainer.transform);
-                    newNote.GetComponent<NoteController>().Init(ConstructedNote[i].m_Timestamp, ConstructedNote[i].m_NoteType, ConstructedNote[i].m_Lifespan);
+                    newNote.GetComponent<INoteController>().Init(ConstructedNote[i].m_Timestamp, ConstructedNote[i].m_NoteType, ConstructedNote[i].m_Lifespan);
                     ConstructedNote[i].m_BeenSpawn = true;
                     ConstructedNote[i].NoteGameObject = newNote;
                 }
@@ -171,7 +171,8 @@ public class RhythmLevelController : MonoBehaviour
                 while ((ClosetValidNoteNum < ConstructedNote.Count
                     && (!ConstructedNote[ClosetValidNoteNum].m_BeenSpawn
                         || ConstructedNote[ClosetValidNoteNum].m_BeenHit
-                        || Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - ThisFramHitTimestamp) > ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<NoteController>().hitThreshold)))
+                        || ThisFramHitTimestamp < ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<INoteController>().ActiveTimestamp
+                        || ThisFramHitTimestamp > ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<INoteController>().MissTimestamp)))
                 {
                     ClosetValidNoteNum++;
                 }
@@ -191,7 +192,7 @@ public class RhythmLevelController : MonoBehaviour
                     }
 
                     ConstructedNote[ClosetValidNoteNum].m_BeenHit = true;
-                    var args = ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<NoteController>().GetHit(ThisFrameHitType, Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - m_TimeStamp));
+                    var args = ConstructedNote[ClosetValidNoteNum].NoteGameObject.GetComponent<INoteController>().GetHit(ThisFrameHitType, Mathf.Abs(ConstructedNote[ClosetValidNoteNum].m_Timestamp - m_TimeStamp));
 	                DoOnNoteResult(args);
                 }
             }
@@ -202,10 +203,10 @@ public class RhythmLevelController : MonoBehaviour
 
             for (int i = 0; i < ConstructedNote.Count; i++)
             {
-                if (ConstructedNote[i].m_BeenSpawn && !ConstructedNote[i].m_BeenHit && (m_TimeStamp > (ConstructedNote[i].m_Timestamp + ConstructedNote[i].NoteGameObject.GetComponent<NoteController>().hitThreshold)))
+                if (ConstructedNote[i].m_BeenSpawn && !ConstructedNote[i].m_BeenHit && (m_TimeStamp > ConstructedNote[i].NoteGameObject.GetComponent<INoteController>().MissTimestamp))
                 {
                     ConstructedNote[i].m_BeenHit = true; 
-                    var args = ConstructedNote[i].NoteGameObject.GetComponent<NoteController>(). GetHit("miss", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
+                    var args = ConstructedNote[i].NoteGameObject.GetComponent<INoteController>(). GetHit("miss", Mathf.Abs(ConstructedNote[i].m_Timestamp - m_TimeStamp));
 	                DoOnNoteResult(args);
 				}
 			}
