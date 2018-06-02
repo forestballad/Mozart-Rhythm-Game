@@ -1,24 +1,33 @@
 ﻿using System;
 using UnityEngine;
 
-public class NoteController : MonoBehaviour {
-    public Sprite LNote;
-    public Sprite LNoteHit;
-    public Sprite RNote;
-    public Sprite RNoteHit;
-    public Sprite BNote;
-    public Sprite BNoteHit;
+public class IBENoteController : INoteController
+{
+	[SerializeField]
+    private Sprite LNote;
+	[SerializeField]
+	private Sprite LNoteHit;
+	[SerializeField]
+	private Sprite RNote;
+	[SerializeField]
+	private Sprite RNoteHit;
+	[SerializeField]
+	private Sprite BNote;
+	[SerializeField]
+	private Sprite BNoteHit;
 
-    public Sprite hitSprite;
-    public Sprite badSprite;
+	[SerializeField]
+	private Sprite hitSprite;
+	[SerializeField]
+	private Sprite badSprite;
 
-    public float m_Timestamp;
+    private float m_Timestamp;
     string m_notetype;
     float m_lifespan;
 
     float m_currentTimestamp;
 
-	public float hitThreshold = 0.12f;
+	float hitThreshold = 0.12f;
 	float HitGoodThreshold = 0.1f;
     float HitPerfectThreshold = 0.05f;
 
@@ -29,6 +38,16 @@ public class NoteController : MonoBehaviour {
 
     Vector3 m_SpawnLoc;
     Vector3 m_VanishLoc;
+
+	public override float MissTimestamp
+	{
+		get { return m_Timestamp + hitThreshold; }
+	}
+
+	public override float ActiveTimestamp
+	{
+		get { return m_Timestamp - hitThreshold; }
+	}
 
     // Use this for initialization
 
@@ -54,7 +73,7 @@ public class NoteController : MonoBehaviour {
 		transform.position = GetLocByTimetamp();
 	}
 
-    public void Init(float timestamp, string inputNoteType, float lifespan)
+    public override void Init(float timestamp, string inputNoteType, float lifespan)
     {
         m_Timestamp = timestamp;
         m_lifespan = lifespan;
@@ -78,14 +97,14 @@ public class NoteController : MonoBehaviour {
         }
     }
 
-    public Vector3 GetLocByTimetamp()
+	private Vector3 GetLocByTimetamp()
     {
         float dist = Vector3.Distance(m_SpawnLoc, m_VanishLoc) * (m_Timestamp - m_currentTimestamp) / m_lifespan;
         Vector3 NoteLoc = new Vector3(m_VanishLoc.x + dist, m_VanishLoc.y, m_VanishLoc.z);
         return NoteLoc;
     }
 
-    public RhythmLevelController.NoteResultEventArgs GetHit(string hitType, float timeDiff)
+    public override RhythmLevelController.NoteResultEventArgs GetHit(string hitType, float timeDiff)
     {
         if (hitType == "miss")
         {
@@ -114,7 +133,7 @@ public class NoteController : MonoBehaviour {
         }
     }
 
-    public RhythmLevelController.NoteResultEventArgs PerfectNotePlayed(bool halfbaseScore)
+    private RhythmLevelController.NoteResultEventArgs PerfectNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
         var args = new RhythmLevelController.NoteResultEventArgs
@@ -125,7 +144,7 @@ public class NoteController : MonoBehaviour {
         return args;
     }
 
-    public RhythmLevelController.NoteResultEventArgs GoodNotePlayed(bool halfbaseScore)
+	private RhythmLevelController.NoteResultEventArgs GoodNotePlayed(bool halfbaseScore)
     {
         GetComponent<SpriteRenderer>().sprite = hitSprite;
         var args = new RhythmLevelController.NoteResultEventArgs
@@ -136,7 +155,7 @@ public class NoteController : MonoBehaviour {
         return args;
     }
 
-    public RhythmLevelController.NoteResultEventArgs BadNotePlayed()
+	private RhythmLevelController.NoteResultEventArgs BadNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
 
@@ -147,7 +166,7 @@ public class NoteController : MonoBehaviour {
         return args;
     }
 
-    public RhythmLevelController.NoteResultEventArgs MissNote()
+	private RhythmLevelController.NoteResultEventArgs MissNote()
     {
         var args = new RhythmLevelController.NoteResultEventArgs
         {
@@ -156,7 +175,7 @@ public class NoteController : MonoBehaviour {
         return args;
     }
 
-    public RhythmLevelController.NoteResultEventArgs WrongNotePlayed()
+	private RhythmLevelController.NoteResultEventArgs WrongNotePlayed()
     {
         GetComponent<SpriteRenderer>().sprite = badSprite;
 
