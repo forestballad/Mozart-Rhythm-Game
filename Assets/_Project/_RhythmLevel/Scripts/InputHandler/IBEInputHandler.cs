@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class IBEInputHandler : IInputHandler
 {
-	float m_HitCoolDown = 0.05f;
-
 	public override string GetInput()
 	{
 		string ThisFrameHitType = "-1";
