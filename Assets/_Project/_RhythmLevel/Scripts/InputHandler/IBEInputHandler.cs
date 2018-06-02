@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class IBEInputHandler : InputHandler
+public class IBEInputHandler : IInputHandler
 {
 	float m_HitCoolDown = 0.05f;
 

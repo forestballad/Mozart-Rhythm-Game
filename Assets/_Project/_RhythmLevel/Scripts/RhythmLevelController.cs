@@ -11,7 +11,7 @@ public class RhythmLevelController : MonoBehaviour
     public AudioClip TheSong;
     public TextAsset NoteRecord;
 	[SerializeField]
-	private InputHandler _inputHandler;
+	private IInputHandler _inputHandler;
 	[SerializeField]
 	private GameGonfig _gameGonfig;
 

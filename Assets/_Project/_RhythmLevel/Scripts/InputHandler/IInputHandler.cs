@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour
+public class IInputHandler : MonoBehaviour
 {
 	public virtual string GetInput()
 	{
